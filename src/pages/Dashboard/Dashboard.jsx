@@ -3,24 +3,43 @@ import ChartLine from "../../components/Chats/LineChart";
 import Profile from "../../components/common/Profile";
 import lineSvg from "../../assets/line.svg";
 import { getAllCalls } from "../../actions/ServerAction";
+import { useDispatch, useSelector } from "react-redux";
+import { allCalls } from "../../features/calls/callSlice";
 
 function Dashboard() {
   const currentDate = new Date();
 
+  const dispatch = useDispatch();
+
+  const callsObejct = useSelector((state) => state.calls);
+
+  const { calls } = callsObejct || {};
   const [, setSearch] = useState("");
-  const [dataObject, setDataObject] = useState({});
-  console.log(dataObject.calls);
+
   useEffect(() => {
     getAllCalls()
       .then((response) => {
-        setDataObject(response.data);
+        dispatch(allCalls(response.data));
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
-  useEffect(() => {}, []);
-  const twoMinutesAgo = new Date(currentDate.getTime() - 2 * 60 * 1000);
+  }, [dispatch]);
+
+  // useEffect(() => {
+  //   if (calls.next_page_uri !== null) {
+  //     getAllCallsSeparately(calls.next_page_uri)
+  //       .then((response) => {
+  //         setTimeout(() => {
+  //           dispatch(allCalls(response.data));
+  //           dispatch(updateAllCalls(response.data));
+  //         }, 100);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   }
+  // }, [dispatch, calls]);
 
   return (
     <div className="">
@@ -70,10 +89,12 @@ function Dashboard() {
                     Calls Received Today
                   </h1>
                   <h1 className="text-6xl font-Dm font-bold mt-4">
-                    {dataObject?.calls &&
-                      dataObject?.calls?.filter((response) => {
+                    {calls?.calls &&
+                      calls?.calls?.filter((response) => {
                         const callDate = new Date(response.date_created);
-                        return callDate.getDate() === currentDate.getDate();
+                        return (
+                          callDate.toDateString() === currentDate.toDateString()
+                        );
                       })?.length}
                   </h1>
                 </div>
@@ -115,12 +136,14 @@ function Dashboard() {
                     Calls Received Past 2 Mins
                   </h1>
                   <h1 className="text-6xl font-Dm font-bold mt-4">
-                    {dataObject?.calls &&
-                      dataObject?.calls?.filter((response) => {
-                        const callDate = new Date(response.date_created);
-                        return (
-                          callDate >= twoMinutesAgo && callDate <= currentDate
-                        );
+                    {calls?.calls &&
+                      calls?.calls.filter((call) => {
+                        const callDate = new Date(call.date_created);
+                        const timeDifferenceInMilliseconds =
+                          currentDate - callDate;
+                        const timeDifferenceInMinutes =
+                          timeDifferenceInMilliseconds / (1000 * 60);
+                        return timeDifferenceInMinutes <= 2;
                       })?.length}
                   </h1>
                 </div>

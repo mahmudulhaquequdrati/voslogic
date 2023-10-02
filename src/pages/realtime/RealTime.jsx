@@ -3,8 +3,22 @@
 import ChartBar from "../../components/Chats/BarChar";
 import Profile from "../../components/common/Profile";
 import lineSvg from "../../assets/line.svg";
+import { useEffect, useState } from "react";
+import { getAllCalls } from "../../actions/ServerAction";
 
 export default function RealTime() {
+  const [calls, setCalls] = useState({});
+
+  useEffect(() => {
+    getAllCalls()
+      .then((response) => {
+        setCalls(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [calls.length]);
+
   return (
     <div>
       <div className="flex justify-end items-center">
@@ -13,7 +27,7 @@ export default function RealTime() {
 
       <div className="flex gap-4  justify-start flex-col lg:flex-row">
         <div
-          className="mt-6 overflow-hidden border-[#3048AD] bg-[#1C1C2E] p-[1px] rounded-2xl w-full lg:w-3/6 "
+          className="mt-6 overflow-hidden border-[#3048AD] bg-[#1C1C2E] p-[1px] rounded-2xl w-full lg:w-3/6 h-[20rem] md:h-[25rem] "
           style={{
             background: `linear-gradient(to right, #2d2d47, #3048AD) `,
           }}
@@ -26,8 +40,8 @@ export default function RealTime() {
                 <p className="text-[#34AA69] -mt-4">17%</p>
               </div>
             </div>
-            <div className="w-full h-[88%] relative flex  items-center">
-              <ChartBar />
+            <div className="w-full h-full relative flex  items-center">
+              <ChartBar calls={calls} />
               <h1 className=" font-bold font-Dm uppercase  text-lg origin-center -rotate-90 -me-6">
                 Calls
               </h1>
@@ -45,7 +59,7 @@ export default function RealTime() {
             }}
           >
             <div className="w-full h-full  bg-[#1C1C2E] rounded-2xl py-8 px-8">
-              <h1 className="text-xl font-medium">Calls Received Today</h1>
+              <h1 className="text-xl font-medium">Calls In Progress</h1>
               <div className="flex  mt-4 items-center justify-between">
                 <div className="flex gap-8 mt-4 items-center">
                   <div className="flex items-center justify-center bg-[#3637EA] h-16 w-16  rounded-full ">
@@ -70,7 +84,11 @@ export default function RealTime() {
                       </svg>
                     </div>
                   </div>
-                  <h1 className="text-5xl font-Ar font-bold ">27</h1>
+                  <h1 className="text-5xl font-Ar font-bold ">
+                    {calls?.calls?.filter((c) => {
+                      return c.status === "in-progress";
+                    })?.length || 0}
+                  </h1>
                 </div>
                 <div className="flex me-4 gap-1 mt-4">
                   <img src={lineSvg} className="w-8 mt-6" alt="" />
@@ -111,7 +129,11 @@ export default function RealTime() {
                       </svg>
                     </div>
                   </div>
-                  <h1 className="text-5xl font-Ar font-bold ">10</h1>
+                  <h1 className="text-5xl font-Ar font-bold ">
+                    {calls?.calls?.filter((c) => {
+                      return c.status === "ringing";
+                    })?.length || 0}
+                  </h1>
                 </div>
                 <div className="flex me-4 gap-1 mt-4">
                   <img src={lineSvg} className="w-8 mt-6" alt="" />
