@@ -46,3 +46,14 @@ export const getAllCallsSeparately = (url) => {
     });
   else return;
 };
+
+export const getRecording = (url) => {
+  if (url !== null)
+    return axios.get(`${spaceURL}/${url}`, {
+      auth: {
+        username: projectId,
+        password: authToken,
+      },
+    });
+  else return;
+};

@@ -4,7 +4,10 @@ import ChartBar from "../../components/Chats/BarChar";
 import Profile from "../../components/common/Profile";
 import lineSvg from "../../assets/line.svg";
 import { useEffect, useState } from "react";
-import { getAllCalls } from "../../actions/ServerAction";
+import {
+  getAllCalls,
+  getInCommingPhoneNumbers,
+} from "../../actions/ServerAction";
 
 export default function RealTime() {
   const [calls, setCalls] = useState({});
@@ -18,6 +21,24 @@ export default function RealTime() {
         console.log(error);
       });
   }, [calls.length]);
+  const [dataObject, setDataObject] = useState({});
+
+  useEffect(() => {
+    getInCommingPhoneNumbers()
+      .then((response) => {
+        setDataObject(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  // incoming_phone_numbers
+  function secondsToMinutesAndSeconds(seconds) {
+    var minutes = Math.floor(seconds / 60);
+    var remainingSeconds = seconds % 60;
+    return minutes + " mins " + remainingSeconds + " sec";
+  }
 
   return (
     <div>
@@ -27,12 +48,12 @@ export default function RealTime() {
 
       <div className="flex gap-4  justify-start flex-col lg:flex-row">
         <div
-          className="mt-6 overflow-hidden border-[#3048AD] bg-[#1C1C2E] p-[1px] rounded-2xl w-full lg:w-3/6 h-[20rem] md:h-[25rem] "
+          className="mt-6 overflow-hidden border-[#3048AD] bg-[#1C1C2E] p-[1px] rounded-2xl w-full lg:w-3/6 h-[23rem] md:h-[25rem] "
           style={{
             background: `linear-gradient(to right, #2d2d47, #3048AD) `,
           }}
         >
-          <div className="w-full h-full bg-[#1C1C2E] rounded-2xl py-8 px-8">
+          <div className="w-full h-full pb-24 lg:pb-20 bg-[#1C1C2E] rounded-2xl py-8 px-8">
             <div className="flex justify-between">
               <h1 className="text-xl font-medium">Calls</h1>
               <div className="flex me-4 gap-2 ">
@@ -46,7 +67,7 @@ export default function RealTime() {
                 Calls
               </h1>
             </div>
-            <div className=" mt-4 lg:-mt-2 font-bold font-Dm uppercase text-center text-xl">
+            <div className=" mt-4 lg:mt-0 font-bold font-Dm uppercase text-center text-xl">
               Time
             </div>
           </div>
@@ -176,45 +197,60 @@ export default function RealTime() {
                     </tr>
                   </thead>
 
-                  <tbody>
-                    <tr>
-                      <th className="border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4 text-center ">
-                        MahmudUL HaQuE
-                      </th>
-                      <td className="border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4  text-center">
-                        01234527890
-                      </td>
-                      <td className="border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4 text-center">
-                        01234567890
-                      </td>
-                      <td className="border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4 text-center ">
-                        <button className="bg-green-500 text-white px-4 py-2 rounded-md">
-                          InProgress
-                        </button>
-                      </td>
-                      <td className="border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4 text-center">
-                        00 min 43 sec
-                      </td>
-                    </tr>
-                    <tr>
-                      <th className="border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4 text-center ">
-                        Jhon Doe
-                      </th>
-                      <td className="border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4  text-center">
-                        01234527890
-                      </td>
-                      <td className="border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4 text-center">
-                        01234567890
-                      </td>
-                      <td className="border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4 text-center ">
-                        <button className="bg-[#3637EA] text-white px-4 py-2 rounded-md">
-                          Ringing
-                        </button>
-                      </td>
-                      <td className="border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4 text-center">
-                        00 min 43 sec
-                      </td>
-                    </tr>
+                  <tbody className="relative my-12 h-20">
+                    {calls?.calls?.length ? (
+                      calls?.calls.filter((d) => {
+                        return (
+                          d.status === "ringing" || d.status === "in-progress"
+                          // || d.status === "completed"
+                        );
+                      }).length ? (
+                        calls?.calls
+                          .filter((d) => {
+                            return (
+                              d.status === "ringing" ||
+                              d.status === "in-progress"
+                              // ||d.status === "completed"
+                            );
+                          })
+                          ?.map((d, i) => {
+                            return (
+                              <tr key={i}>
+                                <th className="border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4 text-center ">
+                                  {dataObject?.incoming_phone_numbers?.filter(
+                                    (dt) => dt?.phone_number === d.to
+                                  )[0]?.friendly_name || "NA"}
+                                </th>
+                                <td className="border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4  text-center">
+                                  {d.from}
+                                </td>
+                                <td className="border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4 text-center">
+                                  {d.to}
+                                </td>
+                                <td className="border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4 text-center ">
+                                  <button
+                                    className={` text-white px-4 py-2 rounded-md ${
+                                      d.status === "in-progress"
+                                        ? //  || d.status === "completed"
+                                          "bg-green-500"
+                                        : "bg-[#3637EA]"
+                                    }`}
+                                  >
+                                    {d.status}
+                                  </button>
+                                </td>
+                                <td className="border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4 text-center">
+                                  {secondsToMinutesAndSeconds(d?.duration || 0)}
+                                </td>
+                              </tr>
+                            );
+                          })
+                      ) : (
+                        <p className="mt-6 absolute">
+                          No calls found ringing or in progress
+                        </p>
+                      )
+                    ) : null}
                   </tbody>
                 </table>
               </div>

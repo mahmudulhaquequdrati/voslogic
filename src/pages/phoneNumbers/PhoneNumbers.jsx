@@ -2,9 +2,22 @@ import { Grid } from "gridjs-react";
 
 import Profile from "../../components/common/Profile";
 import { useEffect, useState } from "react";
-import { getInCommingPhoneNumbers } from "../../actions/ServerAction";
+import {
+  getAllCalls,
+  getInCommingPhoneNumbers,
+} from "../../actions/ServerAction";
 export default function PhoneNumbers() {
   const [dataObject, setDataObject] = useState({});
+  const [calls, setCalls] = useState([]);
+  useEffect(() => {
+    getAllCalls()
+      .then((response) => {
+        setCalls(response.data?.calls);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     getInCommingPhoneNumbers()
@@ -35,12 +48,34 @@ export default function PhoneNumbers() {
             <div className="relative">
               <div className=" mb-3 mt-1    min-w-0  bg-transparent rounded overflow-x-auto ">
                 <Grid
-                  data={dataObject?.incoming_phone_numbers || []}
-                  columns={["phone_number", "friendly_name", "Number of Calls"]}
+                  data={
+                    dataObject?.incoming_phone_numbers?.map((x) => [
+                      x.phone_number,
+                      x.friendly_name,
+                      calls?.filter((d) => d?.to === x.phone_number).length
+                        ? calls?.filter((d) => d?.to === x.phone_number)?.length
+                        : calls?.filter((d) => d?.from === x.phone_number)
+                            .length
+                        ? calls?.filter((d) => d?.from === x.phone_number)
+                            ?.length
+                        : 0,
+                    ]) || []
+                  }
+                  columns={[
+                    {
+                      name: "Phone",
+                    },
+                    {
+                      name: "Name",
+                    },
+                    {
+                      name: "NUmber of Calls",
+                    },
+                  ]}
                   pagination={{
                     limit: 10,
                   }}
-                  search={false}
+                  // search={false}
                   className={{
                     container: "mx-auto",
                     search: "hidden",
@@ -49,7 +84,6 @@ export default function PhoneNumbers() {
                     th: "px-6 bg-blueGray-50 text-blueGray-500 align-middle   py-3 text-base   whitespace-nowrap font-semibold text-center",
                     td: "border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4  text-center text-[#A6A6AD]",
                     paginationSummary: "hidden md:block w-3/6",
-
                     paginationButton:
                       "border px-3 py-1 me-3 md:me-1.5  md:text-sm lg:text-base",
                     paginationButtonCurrent:
