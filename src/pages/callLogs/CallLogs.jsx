@@ -190,12 +190,12 @@ export default function CallLogs() {
                                   height="12"
                                   x="9"
                                   y="2"
-                                  stroke={rec.length ? "green" : "#fff"}
+                                  stroke={rec.length ? "green" : "#000"}
                                   strokeWidth="1.5"
                                   rx="3"
                                 ></rect>
                                 <path
-                                  stroke={rec.length ? "green" : "#fff"}
+                                  stroke={rec.length ? "green" : "#000"}
                                   strokeWidth="1.5"
                                   strokeLinecap="round"
                                   strokeLinejoin="round"

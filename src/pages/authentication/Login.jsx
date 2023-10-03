@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { userLoggedIn } from "../../features/auth/authSlice";
-import { getAuthToken } from "../../actions/ServerAction";
+import { getLogin } from "../../actions/ServerAction";
 const Login = () => {
   const navigate = useNavigate();
 
@@ -12,31 +12,27 @@ const Login = () => {
   const dispatch = useDispatch();
   const handleReg = (e) => {
     e.preventDefault();
-    if (username === "admin" && password === "123456") {
-      getAuthToken()
-        .then((response) => {
-          sessionStorage.setItem(
-            "authUser",
-            JSON.stringify({
-              accessToken: response.data.accounts[0]?.auth_token,
-              user: true,
-            })
-          );
-          dispatch(
-            userLoggedIn({
-              accessToken: response.data.accounts[0]?.auth_token,
-              user: true,
-            })
-          );
+    getLogin(username, password)
+      .then((response) => {
+        sessionStorage.setItem(
+          "authUser",
+          JSON.stringify({
+            accessToken: response.data.accessToken,
+            user: true,
+          })
+        );
+        dispatch(
+          userLoggedIn({
+            accessToken: response.data.accessToken,
+            user: true,
+          })
+        );
 
-          navigate("/dashboard");
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    } else {
-      alert("something went wrong!");
-    }
+        navigate("/dashboard");
+      })
+      .catch(() => {
+        alert("something went wrong!");
+      });
   };
   return (
     <div className="h-screen mx-auto flex flex-col sm:flex-row">

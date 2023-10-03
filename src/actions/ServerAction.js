@@ -57,3 +57,10 @@ export const getRecording = (url) => {
     });
   else return;
 };
+
+export const getLogin = (username, password) => {
+  return axios.post(`https://signalwire-backend.vercel.app/api/v1/user/login`, {
+    email: username,
+    password,
+  });
+};
