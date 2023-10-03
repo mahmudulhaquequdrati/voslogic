@@ -46,14 +46,15 @@ export default function RealTime() {
         <Profile />
       </div>
 
-      <div className="flex gap-4  justify-start flex-col lg:flex-row">
+      {/* <div className="flex"> */}
+      <div className=" flex gap-4  justify-start flex-col lg:flex-row">
         <div
-          className="mt-6 overflow-hidden border-[#3048AD] bg-[#1C1C2E] p-[1px] rounded-2xl w-full lg:w-3/6 h-[23rem] md:h-[25rem] "
+          className="basis-3/5 mt-6 overflow-hidden border-[#3048AD] bg-[#1C1C2E] p-[1px] rounded-2xl w-full lg:w-3/6 h-[23rem] md:h-[25rem] "
           style={{
             background: `linear-gradient(to right, #2d2d47, #3048AD) `,
           }}
         >
-          <div className="w-full h-full pb-24 lg:pb-20 bg-[#1C1C2E] rounded-2xl py-8 px-8">
+          <div className="w-full h-full pb-24 lg:pb-20 bg-[#1C1C2E] rounded-2xl py-8 px-6">
             <div className="flex justify-between">
               <h1 className="text-xl font-medium">Calls</h1>
               <div className="flex me-4 gap-2 ">
@@ -72,7 +73,7 @@ export default function RealTime() {
             </div>
           </div>
         </div>
-        <div className="w-full lg:w-3/6   ">
+        <div className="basis-2/5 w-full lg:w-3/6   ">
           <div
             className="mt-6 overflow-hidden border-[#3048AD] bg-[#1C1C2E] p-[1px] rounded-2xl"
             style={{
@@ -166,7 +167,7 @@ export default function RealTime() {
         </div>
       </div>
 
-      <div className="mt-6 w-full  ">
+      <div className=" mt-6 w-full  ">
         <div
           className="mt-6 overflow-hidden border-[#3048AD] bg-[#1C1C2E] p-[1px] rounded-2xl "
           style={{
@@ -258,6 +259,7 @@ export default function RealTime() {
           </div>
         </div>
       </div>
+      {/* </div> */}
     </div>
   );
 }

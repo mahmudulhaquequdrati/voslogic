@@ -45,7 +45,7 @@ import { BarChart, Bar, LabelList, ResponsiveContainer, XAxis } from "recharts";
 
 const renderCustomizedLabel = (props) => {
   const { x, y, width, value } = props;
-  const radius = 20;
+  const radius = 15;
 
   return (
     <svg>
