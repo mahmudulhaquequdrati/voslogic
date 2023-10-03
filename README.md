@@ -1,8 +1,19 @@
-# React + Vite
+### Welcome to voslogic app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<br/>
 
-Currently, two official plugins are available:
+**_here the main folder is dist folder_**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+you can upload it to any server
+
+<br/>
+<br/>
+
+once you are done with the _**backend**_ part you have to
+**_src/actions/ServerAction.js_**
+
+## _In Get Login Function change the rul to your server url_
+
+<br/>
+
+**https://yourserver/api/v1/user/login**
