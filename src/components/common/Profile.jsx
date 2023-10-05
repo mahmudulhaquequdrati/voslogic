@@ -7,7 +7,7 @@ export default function Profile() {
         <img src={profile} alt="profile" className="w-full h-full" />
       </div>
       <div className="flex items-center gap-2">
-        <h3 className="hidden md:block font-Dm">Jhon Doe</h3>
+        <h3 className="hidden md:block font-Dm">Admin</h3>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24px"

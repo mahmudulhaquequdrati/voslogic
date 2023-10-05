@@ -82,6 +82,24 @@ export default function CallLogs() {
         console.log(error);
       });
   }
+  // For the normal search
+  const [dateFilter, setDateFilter] = useState("");
+  const [filteredCalls, setFilteredCalls] = useState([]);
+  useEffect(() => {
+    // Update filteredCalls whenever dateFilter changes
+    if (!dateFilter) {
+      // If dateFilter is empty, show all calls
+      setFilteredCalls(calls);
+    } else {
+      // Filter calls based on the selected date
+      const filtered = calls.filter((call) => {
+        const callDate = new Date(call.date_created).toDateString();
+        const filterDate = new Date(dateFilter).toDateString();
+        return callDate === filterDate;
+      });
+      setFilteredCalls(filtered);
+    }
+  }, [dateFilter, calls]);
 
   return (
     <div className="">
@@ -98,10 +116,10 @@ export default function CallLogs() {
         <div className="h-full bg-[#1C1C2E] rounded-2xl py-4 px-8 max-w-full">
           {calls.length ? (
             <div className="relative">
-              <div className="flex justify-between mb-3 mt-1    min-w-0 flex-col lg:flex-row bg-transparent rounded overflow-x-auto">
+              <div className="relative flex justify-between mb-3 mt-1    min-w-0 flex-col lg:flex-row bg-transparent rounded overflow-x-auto">
                 {calls.length && dataObject?.incoming_phone_numbers ? (
                   <Grid
-                    data={calls.map((x) => [
+                    data={filteredCalls?.map((x) => [
                       x.date_created,
                       x.date_created,
                       x.duration,
@@ -224,7 +242,7 @@ export default function CallLogs() {
                     ]}
                     search={true}
                     pagination={{
-                      limit: 5,
+                      limit: 10,
                     }}
                     className={{
                       container: "",
@@ -241,10 +259,22 @@ export default function CallLogs() {
                     }}
                   />
                 ) : null}
-                <div className="relative hidden lg:block">
-                  <button className="absolute -right-0 bg-[#3637EA] text-white px-6 py-1.5 rounded-lg font-Ar w-48 mt-3">
-                    <CSVLink data={data}>Export CSV</CSVLink>
-                  </button>
+                <div
+                  className={`flex absolute -right-0 items-center justify-between  w-[67.67%]`}
+                >
+                  <div className=" ">
+                    <input
+                      type="date"
+                      value={dateFilter}
+                      onChange={(e) => setDateFilter(e.target.value)}
+                      className="bg-[#1F1F41] rounded px-2.5 border-[#1F1F41] py-2.5 w-full ms-4 bg-transparent"
+                    />
+                  </div>
+                  <div className="relative hidden lg:block">
+                    <button className=" bg-[#3637EA] text-white px-6 py-2.5 rounded-lg font-Ar w-48 ">
+                      <CSVLink data={data}>Export CSV</CSVLink>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

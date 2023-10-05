@@ -13,14 +13,16 @@ export default function RealTime() {
   const [calls, setCalls] = useState({});
 
   useEffect(() => {
-    getAllCalls()
-      .then((response) => {
-        setCalls(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [calls.length]);
+    setInterval(() => {
+      getAllCalls()
+        .then((response) => {
+          setCalls(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, 1000);
+  }, []);
   const [dataObject, setDataObject] = useState({});
 
   useEffect(() => {
