@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import ChartLine from "../../components/Chats/LineChart";
 import Profile from "../../components/common/Profile";
 import lineSvg from "../../assets/line.svg";
-import { getAllCalls } from "../../actions/ServerAction";
+import {
+  getAllCalls,
+  getInCommingPhoneNumbers,
+} from "../../actions/ServerAction";
 import { useDispatch, useSelector } from "react-redux";
 import { allCalls } from "../../features/calls/callSlice";
 
@@ -20,6 +23,20 @@ function Dashboard() {
     getAllCalls()
       .then((response) => {
         dispatch(allCalls(response.data));
+        sessionStorage.setItem("calls", JSON.stringify(calls));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [dispatch, calls]);
+
+  useEffect(() => {
+    getInCommingPhoneNumbers()
+      .then((response) => {
+        sessionStorage.setItem(
+          "incomming_phone",
+          JSON.stringify(response.data)
+        );
       })
       .catch((error) => {
         console.log(error);

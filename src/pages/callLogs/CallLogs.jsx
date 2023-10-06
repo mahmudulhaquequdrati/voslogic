@@ -3,28 +3,58 @@ import Profile from "../../components/common/Profile";
 import { useEffect, useState } from "react";
 import {
   getAllCalls,
-  getInCommingPhoneNumbers,
+  // getAllCalls,
+  // getInCommingPhoneNumbers,
   getRecording,
 } from "../../actions/ServerAction";
 
 import { CSVLink } from "react-csv";
+// import { toggleApi } from "../../features/layout/layoutSlice";
+// import { useDispatch } from "react-redux";
 
 export default function CallLogs() {
   const [calls, setCalls] = useState([]);
   const [dataObject, setDataObject] = useState({});
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   getAllCalls()
+  //     .then((response) => {
+  //       setCalls(response.data.calls);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+
+  //   getInCommingPhoneNumbers()
+  //     .then((response) => {
+  //       setDataObject(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  //   dispatch(toggleApi(true));
+  // }, [dispatch]);
+
+  const item = sessionStorage.getItem("calls");
+  const phone = sessionStorage.getItem("incomming_phone");
+
+  useEffect(() => {
+    if (item) {
+      setCalls(JSON.parse(item).calls);
+    }
+  }, [item]);
+
+  useEffect(() => {
+    if (phone) {
+      setDataObject(JSON.parse(phone));
+    }
+  }, [phone]);
 
   useEffect(() => {
     getAllCalls()
       .then((response) => {
         setCalls(response.data.calls);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    getInCommingPhoneNumbers()
-      .then((response) => {
-        setDataObject(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -51,7 +81,7 @@ export default function CallLogs() {
     return `${hours}:${minutes}:${seconds}`;
   }
 
-  if (calls.length) {
+  if (calls?.length) {
     calls.forEach((x) => {
       data.push({
         date: getDate(x.date_created),
@@ -116,10 +146,10 @@ export default function CallLogs() {
         <div className="h-full bg-[#1C1C2E] rounded-2xl py-4 px-8 max-w-full">
           {calls.length ? (
             <div className="relative">
-              <div className="relative flex justify-between mb-3 mt-1    min-w-0 flex-col lg:flex-row bg-transparent rounded overflow-x-auto">
+              <div className="relative flex justify-between mb-3 mt-1    w-full flex-col lg:flex-row bg-transparent rounded overflow-x-auto">
                 {calls.length && dataObject?.incoming_phone_numbers ? (
                   <Grid
-                    data={filteredCalls?.map((x) => [
+                    data={filteredCalls.map((x) => [
                       x.date_created,
                       x.date_created,
                       x.duration,
@@ -247,7 +277,7 @@ export default function CallLogs() {
                     className={{
                       container: "",
                       table:
-                        "items-center bg-transparent   border-collapse  font-Ar mt-6 mb-8 table-auto",
+                        "items-center bg-transparent min-w-[80vw] lg:min-w-[70vw] border-collapse  font-Ar mt-6 mb-8 table-auto",
                       th: "px-2 bg-blueGray-50 text-blueGray-500 align-middle   py-3 text-base   whitespace-nowrap font-semibold text-center",
                       td: "border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4  text-center text-[#A6A6AD]",
                       paginationSummary: "hidden md:block",
@@ -260,14 +290,14 @@ export default function CallLogs() {
                   />
                 ) : null}
                 <div
-                  className={`flex absolute -right-0 items-center justify-between  w-[67.67%]`}
+                  className={`flex absolute -right-0 items-center justify-between w-2/4 lg:w-[67.67%]`}
                 >
                   <div className=" ">
                     <input
                       type="date"
                       value={dateFilter}
                       onChange={(e) => setDateFilter(e.target.value)}
-                      className="bg-[#1F1F41] rounded px-2.5 border-[#1F1F41] py-2.5 w-full ms-4 bg-transparent"
+                      className="bg-[#1F1F41] rounded px-2.5 border-[#1F1F41] py-2.5 w-full ms-4 focus:outline-none"
                     />
                   </div>
                   <div className="relative hidden lg:block">

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isSidebarOpen: false,
+  apiCall: false,
 };
 
 const layoutSlice = createSlice({
@@ -11,9 +12,12 @@ const layoutSlice = createSlice({
     toggleSidebar: (state) => {
       state.isSidebarOpen = !state.isSidebarOpen;
     },
+    toggleApi: (state, action) => {
+      state.apiCall = action.payload;
+    },
   },
 });
 
-export const { toggleSidebar } = layoutSlice.actions;
+export const { toggleSidebar, toggleApi } = layoutSlice.actions;
 
 export default layoutSlice.reducer;

@@ -8,22 +8,47 @@ import {
   getAllCalls,
   getInCommingPhoneNumbers,
 } from "../../actions/ServerAction";
+// import { useDispatch, useSelector } from "react-redux";
+// import { toggleApi } from "../../features/layout/layoutSlice";
 
 export default function RealTime() {
   const [calls, setCalls] = useState({});
 
-  useEffect(() => {
-    setInterval(() => {
-      getAllCalls()
-        .then((response) => {
-          setCalls(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, 1000);
-  }, []);
+  // const api = useSelector((state) => state.layout);
+  // const { apiCall } = api || {};
   const [dataObject, setDataObject] = useState({});
+
+  const item = sessionStorage.getItem("calls");
+  const phone = sessionStorage.getItem("incomming_phone");
+
+  useEffect(() => {
+    if (item) {
+      setCalls(JSON.parse(item));
+    }
+  }, [item]);
+
+  useEffect(() => {
+    if (phone) {
+      setDataObject(JSON.parse(phone));
+    }
+  }, [phone]);
+
+  useEffect(() => {
+    if (calls?.calls) {
+      setInterval(() => {
+        // if (!apiCall) {
+        getAllCalls()
+          .then((response) => {
+            setCalls(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        // }
+      }, 2000);
+    }
+  }, [calls.calls]);
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     getInCommingPhoneNumbers()
@@ -33,6 +58,7 @@ export default function RealTime() {
       .catch((error) => {
         console.log(error);
       });
+    // dispatch(toggleApi(true));
   }, []);
 
   // incoming_phone_numbers

@@ -2,32 +2,51 @@ import { Grid } from "gridjs-react";
 
 import Profile from "../../components/common/Profile";
 import { useEffect, useState } from "react";
-import {
-  getAllCalls,
-  getInCommingPhoneNumbers,
-} from "../../actions/ServerAction";
+// import {
+//   getAllCalls,
+//   getInCommingPhoneNumbers,
+// } from "../../actions/ServerAction";
 export default function PhoneNumbers() {
   const [dataObject, setDataObject] = useState({});
   const [calls, setCalls] = useState([]);
-  useEffect(() => {
-    getAllCalls()
-      .then((response) => {
-        setCalls(response.data?.calls);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  const item = sessionStorage.getItem("calls");
+  const phone = sessionStorage.getItem("incomming_phone");
 
   useEffect(() => {
-    getInCommingPhoneNumbers()
-      .then((response) => {
-        setDataObject(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+    if (item) {
+      setCalls(JSON.parse(item).calls);
+    }
+    // getAllCalls()
+    //   .then((response) => {
+    //     setCalls(response.data?.calls);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+  }, [item]);
+
+  useEffect(() => {
+    if (phone) {
+      setDataObject(JSON.parse(phone));
+    }
+    // getAllCalls()
+    //   .then((response) => {
+    //     setCalls(response.data?.calls);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+  }, [phone]);
+
+  // useEffect(() => {
+  //   getInCommingPhoneNumbers()
+  //     .then((response) => {
+  //       setDataObject(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   //   const [search, setSearch] = useState("");
 
