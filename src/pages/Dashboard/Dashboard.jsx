@@ -1,10 +1,18 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import lineSvg from "../../assets/line.svg";
 import ChartLine from "../../components/Chats/LineChart";
 import Profile from "../../components/common/Profile";
-import lineSvg from "../../assets/line.svg";
+import Modal from "../../components/modal/Modal";
+import { openModal } from "../../features/modal/modalSlice";
 
 function Dashboard() {
   const [, setSearch] = useState("");
+  const dispatch = useDispatch();
+
+  const handleCloseModal = () => {
+    dispatch(openModal());
+  };
 
   return (
     <div className="">
@@ -56,7 +64,7 @@ function Dashboard() {
                   <h1 className="text-6xl font-Dm font-bold mt-4">100</h1>
                 </div>
                 <div className="flex items-center justify-center bg-[#3637EA] h-20 w-20  rounded-full ">
-                  <div className="">
+                  <div className="" onClick={() => handleCloseModal()}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="30px"
@@ -136,6 +144,8 @@ function Dashboard() {
           <ChartLine />
         </div>
       </div>
+
+      <Modal />
     </div>
   );
 }
