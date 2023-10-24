@@ -19,7 +19,7 @@ const dashboardIcon = (
   </svg>
 );
 
-const callIcon = (
+const agentIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="20px"
@@ -39,7 +39,7 @@ const callIcon = (
   </svg>
 );
 
-const phoneNumber = (
+const departmentIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="20px"
@@ -89,7 +89,7 @@ const MenuData = () => {
     {
       id: "agents",
       label: "Agents",
-      icon: callIcon,
+      icon: agentIcon,
       link: "/agents",
       iscurrentState,
       click: function () {
@@ -97,13 +97,53 @@ const MenuData = () => {
       },
     },
     {
-      id: "phoneNumbers",
-      label: "Phone Numbers",
-      icon: phoneNumber,
-      link: "/phoneNumbers",
+      id: "department",
+      label: "Department",
+      icon: departmentIcon,
+      link: "/department",
       iscurrentState,
       click: function () {
-        setIscurrentState("Phone Numbers");
+        setIscurrentState("Department");
+      },
+    },
+    {
+      id: "allCalls",
+      label: "All calls",
+      icon: departmentIcon,
+      link: "/allCalls",
+      iscurrentState,
+      click: function () {
+        setIscurrentState("All calls");
+      },
+    },
+    {
+      id: "passed",
+      label: "Passed",
+      icon: departmentIcon,
+      link: "/passed",
+      iscurrentState,
+      click: function () {
+        setIscurrentState("Passed");
+      },
+    },
+    {
+      id: "failed",
+      label: "Failed",
+      icon: departmentIcon,
+      link: "/falied",
+      iscurrentState,
+      click: function () {
+        setIscurrentState("Failed");
+      },
+    },
+    {
+      id: "inProgress",
+      label: "InProgress",
+      icon: departmentIcon,
+      link: "/inProgress",
+      iscurrentState,
+      click: function () {
+        setIscurrentState("InProgress");
       },
     },
   ];
