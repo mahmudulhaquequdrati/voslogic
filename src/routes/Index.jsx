@@ -6,7 +6,7 @@ import AuthProtected from "./AuthProtected";
 import PublicRoute from "./PublicRoutes";
 import Login from "../pages/authentication/Login";
 import Dashboard from "../pages/Dashboard/Dashboard";
-import PhoneNumbers from "../pages/phoneNumbers/PhoneNumbers";
+import Department from "../pages/department/Depertment";
 import Agents from "../pages/agents/Agents";
 
 // import Register from "../pages/authentication/Register";
@@ -33,11 +33,10 @@ const router = createBrowserRouter([
       { path: "/dashboard", element: <Dashboard /> },
 
       {
-        path: "/phoneNumbers",
-        element: <PhoneNumbers />,
+        path: "/department",
+        element: <Department />,
       },
       { path: "/agents", element: <Agents /> },
-
       {
         path: "*",
         element: (
