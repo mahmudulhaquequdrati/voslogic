@@ -39,31 +39,6 @@ const callIcon = (
   </svg>
 );
 
-const realTimeIcon = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="20px"
-    height="20px"
-    fill="none"
-    strokeWidth="1.5"
-    viewBox="0 0 24 24"
-    color="#000000"
-  >
-    <path
-      stroke="#fff"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M8 16V8M12 16v-5M16 16v-3"
-    ></path>
-    <path
-      stroke="#fff"
-      strokeWidth="1.5"
-      d="M3 20.4V3.6a.6.6 0 0 1 .6-.6h16.8a.6.6 0 0 1 .6.6v16.8a.6.6 0 0 1-.6.6H3.6a.6.6 0 0 1-.6-.6Z"
-    ></path>
-  </svg>
-);
-
 const phoneNumber = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -110,24 +85,15 @@ const MenuData = () => {
         setIscurrentState("Dashboard");
       },
     },
+
     {
-      id: "realTime",
-      label: "Real Time",
-      icon: realTimeIcon,
-      link: "/realTime",
-      iscurrentState,
-      click: function () {
-        setIscurrentState("Real Time");
-      },
-    },
-    {
-      id: "callLogs",
-      label: "Call Logs",
+      id: "agents",
+      label: "Agents",
       icon: callIcon,
-      link: "/callLogs",
+      link: "/agents",
       iscurrentState,
       click: function () {
-        setIscurrentState("Call Logs");
+        setIscurrentState("Agents");
       },
     },
     {

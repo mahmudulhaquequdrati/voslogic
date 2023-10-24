@@ -6,9 +6,8 @@ import AuthProtected from "./AuthProtected";
 import PublicRoute from "./PublicRoutes";
 import Login from "../pages/authentication/Login";
 import Dashboard from "../pages/Dashboard/Dashboard";
-import RealTime from "../pages/realtime/RealTime";
 import PhoneNumbers from "../pages/phoneNumbers/PhoneNumbers";
-import CallLogs from "../pages/callLogs/CallLogs";
+import Agents from "../pages/agents/Agents";
 
 // import Register from "../pages/authentication/Register";
 // import AddStock from "../pages/addStock/AddStock";
@@ -32,15 +31,12 @@ const router = createBrowserRouter([
         element: <Layout />,
       },
       { path: "/dashboard", element: <Dashboard /> },
-      {
-        path: "/realTime",
-        element: <RealTime />,
-      },
+
       {
         path: "/phoneNumbers",
         element: <PhoneNumbers />,
       },
-      { path: "/callLogs", element: <CallLogs /> },
+      { path: "/agents", element: <Agents /> },
 
       {
         path: "*",

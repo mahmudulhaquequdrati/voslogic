@@ -1,62 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ChartLine from "../../components/Chats/LineChart";
 import Profile from "../../components/common/Profile";
 import lineSvg from "../../assets/line.svg";
-import {
-  getAllCalls,
-  getInCommingPhoneNumbers,
-} from "../../actions/ServerAction";
-import { useDispatch, useSelector } from "react-redux";
-import { allCalls } from "../../features/calls/callSlice";
 
 function Dashboard() {
-  const currentDate = new Date();
-
-  const dispatch = useDispatch();
-
-  const callsObejct = useSelector((state) => state.calls);
-
-  const { calls } = callsObejct || {};
   const [, setSearch] = useState("");
-
-  useEffect(() => {
-    getAllCalls()
-      .then((response) => {
-        dispatch(allCalls(response.data));
-        sessionStorage.setItem("calls", JSON.stringify(calls));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [dispatch, calls]);
-
-  useEffect(() => {
-    getInCommingPhoneNumbers()
-      .then((response) => {
-        sessionStorage.setItem(
-          "incomming_phone",
-          JSON.stringify(response.data)
-        );
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (calls.next_page_uri !== null) {
-  //     getAllCallsSeparately(calls.next_page_uri)
-  //       .then((response) => {
-  //         setTimeout(() => {
-  //           dispatch(allCalls(response.data));
-  //           dispatch(updateAllCalls(response.data));
-  //         }, 100);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   }
-  // }, [dispatch, calls]);
 
   return (
     <div className="">
@@ -105,15 +53,7 @@ function Dashboard() {
                   <h1 className="text-2xl md:text-xl lg:text-xl font-medium">
                     Calls Received Today
                   </h1>
-                  <h1 className="text-6xl font-Dm font-bold mt-4">
-                    {calls?.calls &&
-                      calls?.calls?.filter((response) => {
-                        const callDate = new Date(response.date_created);
-                        return (
-                          callDate.toDateString() === currentDate.toDateString()
-                        );
-                      })?.length}
-                  </h1>
+                  <h1 className="text-6xl font-Dm font-bold mt-4">100</h1>
                 </div>
                 <div className="flex items-center justify-center bg-[#3637EA] h-20 w-20  rounded-full ">
                   <div className="">
@@ -152,17 +92,7 @@ function Dashboard() {
                   <h1 className="text-2xl md:text-xl lg:text-xl font-medium">
                     Calls Received Past 2 Mins
                   </h1>
-                  <h1 className="text-6xl font-Dm font-bold mt-4">
-                    {calls?.calls &&
-                      calls?.calls.filter((call) => {
-                        const callDate = new Date(call.date_created);
-                        const timeDifferenceInMilliseconds =
-                          currentDate - callDate;
-                        const timeDifferenceInMinutes =
-                          timeDifferenceInMilliseconds / (1000 * 60);
-                        return timeDifferenceInMinutes <= 2;
-                      })?.length}
-                  </h1>
+                  <h1 className="text-6xl font-Dm font-bold mt-4">50</h1>
                 </div>
                 <div className="flex items-center justify-center bg-[#3637EA] h-20 w-20  rounded-full ">
                   <div className="">

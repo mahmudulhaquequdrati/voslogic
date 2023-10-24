@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { userLoggedIn } from "../../features/auth/authSlice";
-import { getLogin } from "../../actions/ServerAction";
 const Login = () => {
   const navigate = useNavigate();
 
@@ -12,27 +11,25 @@ const Login = () => {
   const dispatch = useDispatch();
   const handleReg = (e) => {
     e.preventDefault();
-    getLogin(username, password)
-      .then((response) => {
-        sessionStorage.setItem(
-          "authUser",
-          JSON.stringify({
-            accessToken: response.data.accessToken,
-            user: true,
-          })
-        );
-        dispatch(
-          userLoggedIn({
-            accessToken: response.data.accessToken,
-            user: true,
-          })
-        );
+    if (username == "admin" && password == "123456") {
+      sessionStorage.setItem(
+        "authUser",
+        JSON.stringify({
+          accessToken: "1234567890",
+          user: true,
+        })
+      );
+      dispatch(
+        userLoggedIn({
+          accessToken: "1234567890",
+          user: true,
+        })
+      );
 
-        navigate("/dashboard");
-      })
-      .catch(() => {
-        alert("something went wrong!");
-      });
+      navigate("/dashboard");
+    } else {
+      alert("username is admin and password is 123456");
+    }
   };
   return (
     <div className="h-screen mx-auto flex flex-col sm:flex-row">

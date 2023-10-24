@@ -9,15 +9,6 @@ const spaceURL = "https://vultik.signalwire.com";
 // const url =
 //   "https://vultik.signalwire.com/api/laml/2010-04-01/Accounts/5c46b95f-6635-4c38-a973-e3004fb9d2ac/IncomingPhoneNumbers";
 
-export const getAuthToken = () => {
-  return axios.get(apiUrl, {
-    auth: {
-      username: projectId,
-      password: authToken,
-    },
-  });
-};
-
 export const getInCommingPhoneNumbers = () => {
   return axios.get(`${apiUrl}/${projectId}/IncomingPhoneNumbers`, {
     auth: {
