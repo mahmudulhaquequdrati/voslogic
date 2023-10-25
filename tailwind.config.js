@@ -6,6 +6,7 @@ export default {
       fontFamily: {
         Dm: "DM Sans, sans-serif",
         Ar: "AR One Sans, sans-serif",
+        Tw: "Titillium Web, sans-serif",
       },
     },
   },
