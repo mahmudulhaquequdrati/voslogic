@@ -1,7 +1,10 @@
 import { Grid, _ } from "gridjs-react";
 import { useState } from "react";
 
-export default function AllCalls() {
+// import { toggleApi } from "../../features/layout/layoutSlice";
+// import { useDispatch } from "react-redux";
+
+export default function Failed() {
   const [originalData, setOriginalData] = useState([
     {
       departments: "Sales",
@@ -97,7 +100,7 @@ export default function AllCalls() {
   return (
     <div className="">
       <div className="flex justify-start items-center">
-        <h1 className="text-2xl font-bold"> All Calls </h1>
+        <h1 className="text-2xl font-bold"> Failed </h1>
       </div>
 
       <div
@@ -109,7 +112,7 @@ export default function AllCalls() {
         <div className="h-full bg-[#1C1C2E] rounded-2xl py-4 px-8 max-w-full">
           {originalData ? (
             <div className="relative">
-              <div className="relative flex justify-between mb-3 mt-1    w-full flex-col lg:flex-row bg-transparent rounded overflow-x-auto">
+              <div className="relative flex justify-between mb-3 mt-1 w-full flex-col lg:flex-row bg-transparent rounded overflow-x-auto">
                 {originalData ? (
                   <Grid
                     data={originalData.map((x) => [
@@ -152,14 +155,14 @@ export default function AllCalls() {
                       {
                         name: "Recordings",
                         formatter: (cell) => {
-                          //   let rec = [];
-                          //   getRecording(cell)
-                          //     .then((response) => {
-                          //       rec = response.data?.recordings;
-                          //     })
-                          //     .catch((error) => {
-                          //       console.log(error);
-                          //     });
+                          let rec = [];
+                          // getRecording(cell)
+                          //   .then((response) => {
+                          //     rec = response.data?.recordings;
+                          //   })
+                          //   .catch((error) => {
+                          //     console.log(error);
+                          //   });
 
                           return _(
                             <div

@@ -1,17 +1,3 @@
-<svg width="16" height="9" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="16" height="9" fill="#1E1E1E"/>
-<g id="Voslogic QA Agent" clip-path="url(#clip0_0_1)">
-<rect width="1440" height="1024" transform="translate(-172 -310)" fill="white"/>
-<rect id="Bg" x="-171.5" y="-309.5" width="273" height="1023" fill="#01108D" stroke="#374151"/>
-</g>
-<g id="Group 1069">
-<g id="&#240;&#159;&#166;&#134; icon &#34;arrow down&#34;">
-<path id="Vector" d="M13.999 0.359222H7.2481H1.16898C0.128704 0.359222 -0.391433 1.61622 0.345427 2.35309L5.9586 7.96623C6.858 8.86563 8.32088 8.86563 9.22029 7.96623L11.355 5.8315L14.8334 2.35309C15.5595 1.61622 15.0393 0.359222 13.999 0.359222Z" fill="#9CA3AF"/>
-</g>
-</g>
-<defs>
-<clipPath id="clip0_0_1">
-<rect width="1440" height="1024" fill="white" transform="translate(-172 -310)"/>
-</clipPath>
-</defs>
+<svg width="14" height="7" viewBox="0 0 14 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.8979 0.128592L7.39684 6.6297L0.89573 0.128592L13.8979 0.128592Z" fill="#B7C1CC"/>
 </svg>

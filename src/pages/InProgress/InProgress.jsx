@@ -1,7 +1,7 @@
 import { Grid, _ } from "gridjs-react";
 import { useState } from "react";
 
-export default function AllCalls() {
+export default function InProgress() {
   const [originalData, setOriginalData] = useState([
     {
       departments: "Sales",
@@ -97,7 +97,7 @@ export default function AllCalls() {
   return (
     <div className="">
       <div className="flex justify-start items-center">
-        <h1 className="text-2xl font-bold"> All Calls </h1>
+        <h1 className="text-2xl font-bold"> Progress </h1>
       </div>
 
       <div
@@ -109,7 +109,7 @@ export default function AllCalls() {
         <div className="h-full bg-[#1C1C2E] rounded-2xl py-4 px-8 max-w-full">
           {originalData ? (
             <div className="relative">
-              <div className="relative flex justify-between mb-3 mt-1    w-full flex-col lg:flex-row bg-transparent rounded overflow-x-auto">
+              <div className="relative flex justify-between mb-3 mt-1 w-full flex-col lg:flex-row bg-transparent rounded overflow-x-auto">
                 {originalData ? (
                   <Grid
                     data={originalData.map((x) => [
@@ -152,14 +152,14 @@ export default function AllCalls() {
                       {
                         name: "Recordings",
                         formatter: (cell) => {
-                          //   let rec = [];
-                          //   getRecording(cell)
-                          //     .then((response) => {
-                          //       rec = response.data?.recordings;
-                          //     })
-                          //     .catch((error) => {
-                          //       console.log(error);
-                          //     });
+                          // let rec = [];
+                          // getRecording(cell)
+                          //   .then((response) => {
+                          //     rec = response.data?.recordings;
+                          //   })
+                          //   .catch((error) => {
+                          //     console.log(error);
+                          //   });
 
                           return _(
                             <div
@@ -259,10 +259,10 @@ export default function AllCalls() {
                   />
                 ) : null}
                 <div
-                  className={`!w-full -right-0 md:-top-0 absolute flex items-center justify-between md:justify-end lg:gap-8 md:gap-4 sm:ml-auto top-[68px]`}
+                  className={`flex absolute -right-0 items-center justify-end md:gap-4 lg:gap-8   !w-full sm:ml-auto`}
                 >
                   {/* show data layout */}
-                  <div className="flex flex-row">
+                  <div className="flex">
                     {/* show list items */}
                     <button onClick={() => handleShowData("list")} className="">
                       <span>

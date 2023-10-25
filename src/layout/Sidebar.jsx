@@ -23,6 +23,7 @@ const Sidebar = () => {
   const location = useLocation();
 
   const currentPath = location?.pathname.slice(1) || location;
+  console.log("currentPath ", currentPath);
 
   const handleSidebar = () => {
     // handle through redux
@@ -68,7 +69,7 @@ const Sidebar = () => {
       >
         <img src={logo} className="mt-10 w-4/6 mx-auto" alt="" />
         {/* top Nav Items */}
-        <ul className="mt-6">
+        <ul className="mt-6 max-h-80 overflow-y-scroll">
           {menuData.map((item) => {
             return (
               <li

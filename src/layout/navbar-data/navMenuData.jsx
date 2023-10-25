@@ -190,6 +190,36 @@ const MenuData = () => {
         setIscurrentState("Department");
       },
     },
+    {
+      id: "all_calls",
+      label: "All Calls",
+      icon: null,
+      link: "/all_calls",
+      iscurrentState,
+      click: function () {
+        setIscurrentState("Department");
+      },
+    },
+    {
+      id: "passed",
+      label: "Passed",
+      icon: null,
+      link: "/passed",
+      iscurrentState,
+      click: function () {
+        setIscurrentState("Department");
+      },
+    },
+    {
+      id: "failed",
+      label: "Failed",
+      icon: null,
+      link: "/failed",
+      iscurrentState,
+      click: function () {
+        setIscurrentState("Department");
+      },
+    },
   ];
 
   return <React.Fragment>{menus}</React.Fragment>;

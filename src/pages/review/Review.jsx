@@ -129,49 +129,6 @@ export default function Review() {
                       },
                       {
                         name: "Agents Name",
-                        // formatter: (cell) => {
-                        //   let rec = [];
-                        //   getRecording(cell)
-                        //     .then((response) => {
-                        //       rec = response.data?.recordings;
-                        //     })
-                        //     .catch((error) => {
-                        //       console.log(error);
-                        //     });
-                        //   return _(
-                        //     <div
-                        //       className="flex justify-center"
-                        //       onClick={() => handleRec(cell)}
-                        //     >
-                        //       <svg
-                        //         xmlns="http://www.w3.org/2000/svg"
-                        //         width="24px"
-                        //         height="24px"
-                        //         fill="none"
-                        //         strokeWidth="1.5"
-                        //         viewBox="0 0 24 24"
-                        //         color="#000000"
-                        //       >
-                        //         <rect
-                        //           width="6"
-                        //           height="12"
-                        //           x="9"
-                        //           y="2"
-                        //           stroke={rec.length ? "green" : "#000"}
-                        //           strokeWidth="1.5"
-                        //           rx="3"
-                        //         ></rect>
-                        //         <path
-                        //           stroke={rec.length ? "green" : "#000"}
-                        //           strokeWidth="1.5"
-                        //           strokeLinecap="round"
-                        //           strokeLinejoin="round"
-                        //           d="M5 10v1a7 7 0 0 0 7 7v0a7 7 0 0 0 7-7v-1M12 18v4m0 0H9m3 0h3"
-                        //         ></path>
-                        //       </svg>
-                        //     </div>
-                        //   );
-                        // },
                       },
                       {
                         name: "Actions",

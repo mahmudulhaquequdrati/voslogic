@@ -58,19 +58,19 @@ export default function Department() {
 
   return (
     <div className="">
-      <div className="flex justify-between items-end mb-[42px]">
-        {/* Create Agent Buttons */}
-        <div className="relative  md:max-w-[400px] sm:min-w-max w-[45vw] md:w-[100vw]">
+      <div className="flex justify-center gap-7 md:justify-between flex-col-reverse text-center md:flex-row md:items-end mb-[42px]">
+        {/* Create Department Buttons */}
+        <div className="relative w-full md:max-w-[400px] sm:min-w-max md:w-[100vw]">
           <button
             onClick={() => handleCreateAgent}
-            className=" bg-[#3637EA] text-white px-6 py-2.5 rounded-lg font-Ar block w-full"
+            className=" bg-[#3637EA] text-white text-center px-6 py-2.5 rounded-lg font-Ar block w-full"
           >
             Create Department
           </button>
         </div>
 
         {/* Current Balance */}
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-5 justify-center">
           <span className="bg-[#3637EA] w-[58px] h-[58px] rounded-full flex items-center justify-center">
             <svg
               width="38"
@@ -89,7 +89,7 @@ export default function Department() {
           </span>
           <div className="text-white text-right leading-9 text-2xl">
             <p className="font-normal"> Current Balance </p>
-            <strong className="font-bold"> $456,234,11.04 </strong>
+            <strong className="font-bold"> -$456,234,11.04 </strong>
           </div>
         </div>
       </div>

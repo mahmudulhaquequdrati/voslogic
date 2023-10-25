@@ -1,5 +1,6 @@
 import { Grid, _ } from "gridjs-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import cancelIcons from "../../assets/cancel_icons.png";
 import deleteIcons from "../../assets/delete_icons.png";
 import editIcons from "../../assets/edit_icons.png";
@@ -58,19 +59,19 @@ export default function Agents() {
 
   return (
     <div className="">
-      <div className="flex justify-between items-end mb-[42px]">
+      <div className="flex justify-center gap-7 md:justify-between flex-col-reverse text-center md:flex-row md:items-end mb-[42px]">
         {/* Create Agent Buttons */}
-        <div className="relative  md:max-w-[400px] sm:min-w-max w-[45vw] md:w-[100vw]">
+        <div className="relative w-full md:max-w-[400px] sm:min-w-max md:w-[100vw]">
           <button
             onClick={() => handleCreateAgent}
-            className=" bg-[#3637EA] text-white px-6 py-2.5 rounded-lg font-Ar block w-full"
+            className=" bg-[#3637EA] text-white text-center px-6 py-2.5 rounded-lg font-Ar block w-full"
           >
             Create Agent
           </button>
         </div>
 
         {/* Current Balance */}
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-5 justify-center">
           <span className="bg-[#3637EA] w-[58px] h-[58px] rounded-full flex items-center justify-center">
             <svg
               width="38"
@@ -129,49 +130,6 @@ export default function Agents() {
                       },
                       {
                         name: "Agents Name",
-                        // formatter: (cell) => {
-                        //   let rec = [];
-                        //   getRecording(cell)
-                        //     .then((response) => {
-                        //       rec = response.data?.recordings;
-                        //     })
-                        //     .catch((error) => {
-                        //       console.log(error);
-                        //     });
-                        //   return _(
-                        //     <div
-                        //       className="flex justify-center"
-                        //       onClick={() => handleRec(cell)}
-                        //     >
-                        //       <svg
-                        //         xmlns="http://www.w3.org/2000/svg"
-                        //         width="24px"
-                        //         height="24px"
-                        //         fill="none"
-                        //         strokeWidth="1.5"
-                        //         viewBox="0 0 24 24"
-                        //         color="#000000"
-                        //       >
-                        //         <rect
-                        //           width="6"
-                        //           height="12"
-                        //           x="9"
-                        //           y="2"
-                        //           stroke={rec.length ? "green" : "#000"}
-                        //           strokeWidth="1.5"
-                        //           rx="3"
-                        //         ></rect>
-                        //         <path
-                        //           stroke={rec.length ? "green" : "#000"}
-                        //           strokeWidth="1.5"
-                        //           strokeLinecap="round"
-                        //           strokeLinejoin="round"
-                        //           d="M5 10v1a7 7 0 0 0 7 7v0a7 7 0 0 0 7-7v-1M12 18v4m0 0H9m3 0h3"
-                        //         ></path>
-                        //       </svg>
-                        //     </div>
-                        //   );
-                        // },
                       },
                       {
                         name: "Actions",
@@ -181,23 +139,29 @@ export default function Agents() {
                             <div className="flex justify-center items-center gap-5 ">
                               <button
                                 onClick={() => handleDelete(cell)}
-                                className="text-3xl flex justify-center items-center"
+                                className="w-8 h-8 flex justify-center items-center"
                               >
-                                <img src={deleteIcons} />
+                                <img
+                                  className="w-8 h-8 rounded-sm"
+                                  src={deleteIcons}
+                                />
                               </button>
 
                               <button
-                                className="text-2xl flex justify-center items-center"
+                                className="w-8 h-8 flex justify-center items-center"
                                 onClick={() => handleEdit(cell)}
                               >
-                                <img src={editIcons} />
+                                <img
+                                  className="w-8 h-8 rounded-sm"
+                                  src={editIcons}
+                                />
                               </button>
 
                               <button
-                                className="text-3xl flex justify-center items-center"
+                                className="w-8 h-8 flex justify-center items-center "
                                 onClick={() => handleCancel(cell)}
                               >
-                                <img src={cancelIcons} />
+                                <img className="rounded-sm" src={cancelIcons} />
                               </button>
                             </div>
                           );
