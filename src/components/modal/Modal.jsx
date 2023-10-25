@@ -53,7 +53,7 @@ const Modal = () => {
               />
             </div>
             <div className="w-full flex flex-col gap-1">
-              <p className="text-[10px] font-normal text-[#3F3F3F] bg-[#F3F8FE] p-5 rounded-r-lg rounded-tl-lg">
+              <p className="text-[14px] font-normal text-[#3F3F3F] bg-[#F3F8FE] p-5 rounded-r-lg rounded-tl-lg">
                 Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit
                 amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem
                 ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet
@@ -63,7 +63,7 @@ const Modal = () => {
                 dolor sit amet consectetur. Lorem ipsum dolor sit amet
                 consectetur. Lorem ipsum dolor sit amet consectetur.
               </p>
-              <span className="text-[#E7E7E7] text-[10px] leading-4">
+              <span className="text-[#E7E7E7] text-[13px] leading-4">
                 8.50 AM
               </span>
             </div>
@@ -71,13 +71,13 @@ const Modal = () => {
           {/* My Chat */}
           <div className="w-full flex justify-end">
             <div className="w-[70%] flex flex-col gap-1 items-end">
-              <p className="text-[10px] font-normal text-[#ffffff] bg-[#1C1C2E] p-5 rounded-l-lg rounded-tr-lg">
+              <p className="text-[14px] font-normal text-[#ffffff] bg-[#1C1C2E] p-5 rounded-l-lg rounded-tr-lg">
                 Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit
                 amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem
                 ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet
                 consectetur. Lorem ipsum dolor sit amet consectetur.
               </p>
-              <span className="text-[#E7E7E7] text-[10px] leading-4">
+              <span className="text-[#E7E7E7] text-[13px] leading-4">
                 8.52 AM
               </span>
             </div>
@@ -105,7 +105,7 @@ const Modal = () => {
               />
             </div>
             <div className="w-full flex flex-col gap-1">
-              <p className="text-[10px] font-normal text-[#3F3F3F] bg-[#F3F8FE] p-5 rounded-r-lg rounded-tl-lg">
+              <p className="text-[14px] font-normal text-[#3F3F3F] bg-[#F3F8FE] p-5 rounded-r-lg rounded-tl-lg">
                 Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit
                 amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem
                 ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet
@@ -115,7 +115,7 @@ const Modal = () => {
                 dolor sit amet consectetur. Lorem ipsum dolor sit amet
                 consectetur. Lorem ipsum dolor sit amet consectetur.
               </p>
-              <span className="text-[#E7E7E7] text-[10px] leading-4">
+              <span className="text-[#E7E7E7] text-[13px] leading-4">
                 8.50 AM
               </span>
             </div>
@@ -123,13 +123,13 @@ const Modal = () => {
           {/* My Chat */}
           <div className="w-full flex justify-end">
             <div className="w-[70%] flex flex-col gap-1 items-end">
-              <p className="text-[10px] font-normal text-[#ffffff] bg-[#1C1C2E] p-5 rounded-l-lg rounded-tr-lg">
+              <p className="text-[14px] font-normal text-[#ffffff] bg-[#1C1C2E] p-5 rounded-l-lg rounded-tr-lg">
                 Lorem ipsum dolor sit amet consectetur. Lorem ipsum dolor sit
                 amet consectetur. Lorem ipsum dolor sit amet consectetur. Lorem
                 ipsum dolor sit amet consectetur. Lorem ipsum dolor sit amet
                 consectetur. Lorem ipsum dolor sit amet consectetur.
               </p>
-              <span className="text-[#E7E7E7] text-[10px] leading-4">
+              <span className="text-[#E7E7E7] text-[13px] leading-4">
                 8.52 AM
               </span>
             </div>
@@ -488,7 +488,7 @@ const Modal = () => {
 
   return (
     <div
-      className={`max-w-[865px] w-full min-h-[500px] h-auto fixed top-[0] right-[0] z-[3000] bg-[#3637EA] ${
+      className={`max-w-[865px] w-full min-h-[500px] h-auto fixed top-[200px] right-[200px] z-[3000] bg-[#3637EA] ${
         isOpenModal ? "block" : "hidden"
       }`}
     >
