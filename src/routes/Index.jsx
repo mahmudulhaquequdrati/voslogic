@@ -2,12 +2,16 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import Layout from "../layout";
 
 // import Dashboard from "../pages/Dashboard";
-import AuthProtected from "./AuthProtected";
-import PublicRoute from "./PublicRoutes";
+import Agents from "../pages/agents/Agents";
+import AllCalls from "../pages/AllCalls/AllCalls";
 import Login from "../pages/authentication/Login";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Department from "../pages/department/Depertment";
-import Agents from "../pages/agents/Agents";
+import Failed from "../pages/Failed/Failed";
+import Passed from "../pages/Passed/Passed";
+import Review from "../pages/review/Review";
+import AuthProtected from "./AuthProtected";
+import PublicRoute from "./PublicRoutes";
 
 // import Register from "../pages/authentication/Register";
 // import AddStock from "../pages/addStock/AddStock";
@@ -32,11 +36,17 @@ const router = createBrowserRouter([
       },
       { path: "/dashboard", element: <Dashboard /> },
 
+      { path: "/agents", element: <Agents /> },
       {
         path: "/department",
         element: <Department />,
       },
-      { path: "/agents", element: <Agents /> },
+      { path: "/review", element: <Review /> },
+      { path: "/all_calls", element: <AllCalls /> },
+      { path: "/passed", element: <Passed /> },
+      { path: "/failed", element: <Failed /> },
+      { path: "/in-progress", element: <Failed /> },
+
       {
         path: "*",
         element: (

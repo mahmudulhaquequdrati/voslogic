@@ -1,140 +1,98 @@
 import { Grid, _ } from "gridjs-react";
-import Profile from "../../components/common/Profile";
-import { useEffect, useState } from "react";
-import {
-  getAllCalls,
-  // getAllCalls,
-  // getInCommingPhoneNumbers,
-  getRecording,
-} from "../../actions/ServerAction";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import cancelIcons from "../../assets/cancel_icons.png";
+import deleteIcons from "../../assets/delete_icons.png";
+import editIcons from "../../assets/edit_icons.png";
 
-import { CSVLink } from "react-csv";
-// import { toggleApi } from "../../features/layout/layoutSlice";
-// import { useDispatch } from "react-redux";
+export default function Agents() {
+  const [originalData, setOriginalData] = useState([
+    {
+      departments: "Sales",
+      createDate: "Tue, 24 Oct 2023 13:27:05 +0000",
+      AgentName: "John Doe",
+      _id: "26874ysadhfkajsl",
+    },
+    {
+      departments: "Marketing",
+      createDate: "Tue, 24 Oct 2023 13:27:04 +0000",
+      AgentName: "Jane Doe",
+      _id: "26874ysadhfkajsl",
+    },
+    {
+      departments: "Customer Support",
+      createDate: "Tue, 24 Oct 2023 12:57:16 +0000",
+      AgentName: "Peter Jones",
+      _id: "26874ysadhfkajsl",
+    },
+    {
+      departments: "Engineering",
+      createDate: "Tue, 24 Oct 2023 01:16:09 +0000",
+      AgentName: "Mary Smith",
+      _id: "26874ysadhfkajsl",
+    },
+    {
+      departments: "Product Management",
+      createDate: "Mon, 23 Oct 2023 23:35:38 +0000",
+      AgentName: "David Williams",
+      _id: "26874ysadhfkajsl",
+    },
+  ]);
 
-export default function CallLogs() {
-  const [calls, setCalls] = useState([]);
-  const [dataObject, setDataObject] = useState({});
-  // const dispatch = useDispatch();
+  // Delete Button
+  const handleDelete = (data) => {
+    console.log("Delete ", data);
+  };
 
-  // useEffect(() => {
-  //   getAllCalls()
-  //     .then((response) => {
-  //       setCalls(response.data.calls);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
+  // Edit Handle
+  const handleEdit = (data) => {
+    console.log("Edit ", data);
+  };
 
-  //   getInCommingPhoneNumbers()
-  //     .then((response) => {
-  //       setDataObject(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  //   dispatch(toggleApi(true));
-  // }, [dispatch]);
+  // Cancel handle
+  const handleCancel = (data) => {
+    console.log("Cancel ", data);
+  };
 
-  const item = sessionStorage.getItem("calls");
-  const phone = sessionStorage.getItem("incomming_phone");
-
-  useEffect(() => {
-    if (item) {
-      setCalls(JSON.parse(item).calls);
-    }
-  }, [item]);
-
-  useEffect(() => {
-    if (phone) {
-      setDataObject(JSON.parse(phone));
-    }
-  }, [phone]);
-
-  useEffect(() => {
-    getAllCalls()
-      .then((response) => {
-        setCalls(response.data.calls);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  let data = [];
-  function getDate(cell) {
-    const date = new Date(cell);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-
-    return `${month}/${day}/${year}`;
-  }
-
-  function getTime(cell) {
-    const dateObject = new Date(cell);
-
-    const hours = dateObject.getUTCHours().toString().padStart(2, "0");
-    const minutes = dateObject.getUTCMinutes().toString().padStart(2, "0");
-    const seconds = dateObject.getUTCSeconds().toString().padStart(2, "0");
-
-    return `${hours}:${minutes}:${seconds}`;
-  }
-
-  if (calls?.length) {
-    calls.forEach((x) => {
-      data.push({
-        date: getDate(x.date_created),
-        time: getTime(x.date_created),
-        duration: secondsToMinutesAndSeconds(x.duration),
-        from: x.from,
-        to: x.to,
-        toName:
-          dataObject?.incoming_phone_numbers?.filter(
-            (d) => d?.phone_number === x.to
-          )[0]?.friendly_name || "NA",
-      });
-    });
-  }
-
-  function secondsToMinutesAndSeconds(seconds) {
-    var minutes = Math.floor(seconds / 60);
-    var remainingSeconds = seconds % 60;
-    return minutes + " mins " + remainingSeconds + " sec";
-  }
-
-  function handleRec(url) {
-    getRecording(url)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-  // For the normal search
-  const [dateFilter, setDateFilter] = useState("");
-  const [filteredCalls, setFilteredCalls] = useState([]);
-  useEffect(() => {
-    // Update filteredCalls whenever dateFilter changes
-    if (!dateFilter) {
-      // If dateFilter is empty, show all calls
-      setFilteredCalls(calls);
-    } else {
-      // Filter calls based on the selected date
-      const filtered = calls.filter((call) => {
-        const callDate = new Date(call.date_created).toDateString();
-        const filterDate = new Date(dateFilter).toDateString();
-        return callDate === filterDate;
-      });
-      setFilteredCalls(filtered);
-    }
-  }, [dateFilter, calls]);
+  // Create Agent
+  const handleCreateAgent = () => {};
 
   return (
     <div className="">
-      <div className="flex justify-end items-center">
-        <Profile />
+      <div className="flex justify-center gap-7 md:justify-between flex-col-reverse text-center md:flex-row md:items-end mb-[42px]">
+        {/* Create Agent Buttons */}
+        <div className="relative w-full md:max-w-[400px] sm:min-w-max md:w-[100vw]">
+          <button
+            onClick={() => handleCreateAgent}
+            className=" bg-[#3637EA] text-white text-center px-6 py-2.5 rounded-lg font-Ar block w-full"
+          >
+            Create Agent
+          </button>
+        </div>
+
+        {/* Current Balance */}
+        <div className="flex items-center gap-5 justify-center">
+          <span className="bg-[#3637EA] w-[58px] h-[58px] rounded-full flex items-center justify-center">
+            <svg
+              width="38"
+              height="38"
+              viewBox="0 0 38 38"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M28.1342 13.2712H34.8334C34.8334 7.89227 31.6105 4.75 26.1497 4.75H11.8505C6.38971 4.75 3.16675 7.89227 3.16675 13.2026V24.7974C3.16675 30.1077 6.38971 33.25 11.8505 33.25H26.1497C31.6105 33.25 34.8334 30.1077 34.8334 24.7974V24.3034H28.1342C25.025 24.3034 22.5045 21.8461 22.5045 18.8148C22.5045 15.7834 25.025 13.3261 28.1342 13.3261V13.2712ZM28.1342 15.6313H33.6512C34.3041 15.6313 34.8334 16.1474 34.8334 16.7839V20.7907C34.8258 21.4242 34.3009 21.9359 33.6512 21.9433H28.2608C26.6868 21.964 25.3104 20.9133 24.9534 19.4185C24.7746 18.4906 25.0256 17.5331 25.6391 16.8027C26.2526 16.0722 27.1659 15.6435 28.1342 15.6313ZM28.3734 19.8439H28.8942C29.5626 19.8439 30.1045 19.3156 30.1045 18.6638C30.1045 18.0121 29.5626 17.4838 28.8942 17.4838H28.3734C28.0537 17.4801 27.7458 17.6013 27.5184 17.8205C27.291 18.0396 27.163 18.3384 27.163 18.6501C27.163 19.3041 27.7027 19.8364 28.3734 19.8439ZM10.6682 13.2712H19.6053C20.2737 13.2712 20.8156 12.7428 20.8156 12.0911C20.8156 11.4394 20.2737 10.911 19.6053 10.911H10.6682C10.0052 10.911 9.46557 11.431 9.45786 12.0774C9.45781 12.7314 9.99749 13.2637 10.6682 13.2712Z"
+                fill="#35BE5E"
+              />
+            </svg>
+          </span>
+          <div className="text-white text-right leading-9 text-2xl">
+            <p className="font-normal"> Current Balance </p>
+            <strong className="font-bold"> $456,234,11.04 </strong>
+          </div>
+        </div>
       </div>
 
       <div
@@ -144,30 +102,23 @@ export default function CallLogs() {
         }}
       >
         <div className="h-full bg-[#1C1C2E] rounded-2xl py-4 px-8 max-w-full">
-          {calls.length ? (
+          {originalData.length ? (
             <div className="relative">
               <div className="relative flex justify-between mb-3 mt-1    w-full flex-col lg:flex-row bg-transparent rounded overflow-x-auto">
-                {calls.length && dataObject?.incoming_phone_numbers ? (
+                {originalData.length ? (
                   <Grid
-                    data={filteredCalls.map((x) => [
-                      x.date_created,
-                      x.date_created,
-                      x.duration,
-                      x.from,
-                      x.to,
-                      dataObject?.incoming_phone_numbers?.filter(
-                        (d) => d?.phone_number === x.to
-                      ).length
-                        ? dataObject?.incoming_phone_numbers?.filter(
-                            (d) => d?.phone_number === x.to
-                          )[0]?.friendly_name
-                        : "NA",
-                      x.subresource_uris?.recordings || " ",
-                      "ai",
+                    data={originalData.map((x) => [
+                      x.departments,
+                      x.createDate,
+                      x.AgentName || " ",
+                      x._id,
                     ])}
                     columns={[
                       {
-                        name: "Date",
+                        name: `Departments`,
+                      },
+                      {
+                        name: "Created Date",
                         formatter: (cell) => {
                           const date = new Date(cell);
                           const day = date.getDate();
@@ -178,99 +129,46 @@ export default function CallLogs() {
                         },
                       },
                       {
-                        name: "Time",
-                        formatter: (cell) => {
-                          const dateObject = new Date(cell);
-
-                          const hours = dateObject
-                            .getUTCHours()
-                            .toString()
-                            .padStart(2, "0");
-                          const minutes = dateObject
-                            .getUTCMinutes()
-                            .toString()
-                            .padStart(2, "0");
-                          const seconds = dateObject
-                            .getUTCSeconds()
-                            .toString()
-                            .padStart(2, "0");
-
-                          return `${hours}:${minutes}:${seconds}`;
-                        },
+                        name: "Agents Name",
                       },
                       {
-                        name: "Duration",
+                        name: "Actions",
                         formatter: (cell) => {
-                          const result = secondsToMinutesAndSeconds(cell);
-                          return result;
-                        },
-                      },
-                      "From",
-                      "To",
-                      "To Number Name",
-                      {
-                        name: "Recordings",
-                        formatter: (cell) => {
-                          let rec = [];
-                          getRecording(cell)
-                            .then((response) => {
-                              rec = response.data?.recordings;
-                            })
-                            .catch((error) => {
-                              console.log(error);
-                            });
+                          // return cell;
                           return _(
-                            <div
-                              className="flex justify-center"
-                              onClick={() => handleRec(cell)}
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24px"
-                                height="24px"
-                                fill="none"
-                                strokeWidth="1.5"
-                                viewBox="0 0 24 24"
-                                color="#000000"
+                            <div className="flex justify-center items-center gap-5 ">
+                              <button
+                                onClick={() => handleDelete(cell)}
+                                className="w-8 h-8 flex justify-center items-center"
                               >
-                                <rect
-                                  width="6"
-                                  height="12"
-                                  x="9"
-                                  y="2"
-                                  stroke={rec.length ? "green" : "#000"}
-                                  strokeWidth="1.5"
-                                  rx="3"
-                                ></rect>
-                                <path
-                                  stroke={rec.length ? "green" : "#000"}
-                                  strokeWidth="1.5"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M5 10v1a7 7 0 0 0 7 7v0a7 7 0 0 0 7-7v-1M12 18v4m0 0H9m3 0h3"
-                                ></path>
-                              </svg>
-                            </div>
-                          );
+                                <img
+                                  className="w-8 h-8 rounded-sm"
+                                  src={deleteIcons}
+                                />
+                              </button>
 
-                          // return cell;
-                        },
-                      },
-                      {
-                        name: "Action",
-                        formatter: (cell) => {
-                          // return cell;
-                          return _(
-                            <div className="flex justify-center items-center">
-                              <div className="flex justify-center items-center border p-2 h-10 w-10 rounded-full">
-                                {cell}
-                              </div>
+                              <button
+                                className="w-8 h-8 flex justify-center items-center"
+                                onClick={() => handleEdit(cell)}
+                              >
+                                <img
+                                  className="w-8 h-8 rounded-sm"
+                                  src={editIcons}
+                                />
+                              </button>
+
+                              <button
+                                className="w-8 h-8 flex justify-center items-center "
+                                onClick={() => handleCancel(cell)}
+                              >
+                                <img className="rounded-sm" src={cancelIcons} />
+                              </button>
                             </div>
                           );
                         },
                       },
                     ]}
-                    search={true}
+                    search={false}
                     pagination={{
                       limit: 10,
                     }}
@@ -278,7 +176,7 @@ export default function CallLogs() {
                       container: "",
                       table:
                         "items-center bg-transparent min-w-[80vw] lg:min-w-[70vw] border-collapse  font-Ar mt-6 mb-8 table-auto",
-                      th: "px-2 bg-blueGray-50 text-blueGray-500 align-middle   py-3 text-base   whitespace-nowrap font-semibold text-center",
+                      th: "px-2 bg-blueGray-50 text-blueGray-500 align-middle py-3 text-base  bg-[#3637EA] whitespace-nowrap font-semibold text-center",
                       td: "border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4  text-center text-[#A6A6AD]",
                       paginationSummary: "hidden md:block",
                       paginationButton: "border px-3 py-1 me-3 ",
@@ -289,23 +187,6 @@ export default function CallLogs() {
                     }}
                   />
                 ) : null}
-                <div
-                  className={`flex absolute -right-0 items-center justify-between w-2/4 lg:w-[67.67%]`}
-                >
-                  <div className=" ">
-                    <input
-                      type="date"
-                      value={dateFilter}
-                      onChange={(e) => setDateFilter(e.target.value)}
-                      className="bg-[#1F1F41] rounded px-2.5 border-[#1F1F41] py-2.5 w-full ms-4 focus:outline-none"
-                    />
-                  </div>
-                  <div className="relative hidden lg:block">
-                    <button className=" bg-[#3637EA] text-white px-6 py-2.5 rounded-lg font-Ar w-48 ">
-                      <CSVLink data={data}>Export CSV</CSVLink>
-                    </button>
-                  </div>
-                </div>
               </div>
             </div>
           ) : null}

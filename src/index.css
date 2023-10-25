@@ -6,11 +6,21 @@
 .gridjs-pagination {
   @apply flex md:justify-between items-center mb-4 justify-end;
 }
+/* .gridjs-head {
+  @apply flex md:flex-col
+} */
+* {
+  transition: .4s;
+}
+
+.gridjs-head {
+  @apply mb-[84px] md:mb-0 ;
+}
 .gridjs-search {
-  @apply relative  border border-[#1C1C2E]  p-1 ps-4 rounded-lg flex w-full md:w-6/12 lg:w-4/12 bg-[#1F1F41] items-center;
+  @apply relative  border border-[#1C1C2E]  p-1 ps-4 rounded-lg flex w-full md:w-6/12 lg:w-4/12 bg-[#01108D] items-center;
 }
 .gridjs-search input {
-  @apply focus:outline-none  text-sm w-full   pe-4 ps-8 py-2 bg-[#1F1F41];
+  @apply focus:outline-none text-sm w-full pe-4  ps-8 py-2 bg-[#01108D] rounded-lg;
 }
 .gridjs-search::after {
   content: "";
@@ -21,4 +31,12 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+}
+.gridjs-th-content {
+  @apply relative;
+}
+.gridjs-th-content::after {
+  content: url("../src/assets/icon\ _arrow\ down_.svg");
+ margin-left: 10px;
+ width: 6px;
 }
