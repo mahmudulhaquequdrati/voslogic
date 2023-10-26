@@ -488,7 +488,7 @@ const Modal = () => {
 
   return (
     <div
-      className={`max-w-[865px] w-full min-h-[500px] h-auto fixed top-[200px] right-[200px] z-[3000] bg-[#3637EA] ${
+      className={`max-w-[865px] w-full md:max-w-full min-h-[500px] h-auto fixed top-[200px] right-[200px] md:right-0 md:top-[100px] z-[3000] bg-[#3637EA] ${
         isOpenModal ? "block" : "hidden"
       }`}
     >
@@ -580,7 +580,7 @@ const Modal = () => {
                 />
               </svg>
             </span>
-            <span className="text-white font-bold text-[15px] leading-6">
+            <span className="text-white font-bold text-[10px] sm:text-[15px] leading-6">
               Call Transcription
             </span>
           </div>
@@ -619,7 +619,7 @@ const Modal = () => {
                 />
               </svg>
             </span>
-            <span className="text-white font-bold text-[15px] leading-6">
+            <span className="text-white font-bold text-[10px] sm:text-[15px] leading-6">
               Chat with AI
             </span>
           </div>
@@ -658,7 +658,7 @@ const Modal = () => {
                 />
               </svg>
             </span>
-            <span className="text-white font-bold text-[15px] leading-6">
+            <span className="text-white font-bold text-[10px] sm:text-[15px] leading-6">
               AI Response
             </span>
           </div>
@@ -711,7 +711,7 @@ const Modal = () => {
                 />
               </svg>
             </span>
-            <span className="text-white font-bold text-[15px] leading-6">
+            <span className="text-white font-bold text-[10px] sm:text-[15px] leading-6">
               About section
             </span>
           </div>
@@ -762,7 +762,7 @@ const Modal = () => {
                 />
               </svg>
             </span>
-            <span className="text-white font-bold text-[15px] leading-6">
+            <span className="text-white font-bold text-[10px] sm:text-[15px] leading-6">
               Add Notes
             </span>
           </div>
@@ -786,7 +786,7 @@ const Modal = () => {
                 />
               </svg>
             </span>
-            <span className="text-white font-bold text-[15px] leading-6">
+            <span className="text-white font-bold text-[10px] sm:text-[15px] leading-6">
               Flags
             </span>
           </div>

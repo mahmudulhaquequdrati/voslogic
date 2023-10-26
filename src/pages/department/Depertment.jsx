@@ -3,8 +3,10 @@ import { useState } from "react";
 import cancelIcons from "../../assets/cancel_icons.png";
 import deleteIcons from "../../assets/delete_icons.png";
 import editIcons from "../../assets/edit_icons.png";
+import CreateAgentAndDepartment from "../../components/Create/CreateAgentAndDepartment";
 
 export default function Department() {
+  const [isDepartmentCreate, setIsDepartmentCreate] = useState(false);
   const [originalData, setOriginalData] = useState([
     {
       departments: "Sales",
@@ -53,19 +55,16 @@ export default function Department() {
     console.log("Cancel ", data);
   };
 
-  // Create Agent
-  const handleCreateAgent = () => {};
-
   return (
     <div className="">
       <div className="flex justify-center gap-7 md:justify-between flex-col-reverse text-center md:flex-row md:items-end mb-[42px]">
         {/* Create Department Buttons */}
-        <div className="relative w-full md:max-w-[400px] sm:min-w-max md:w-[100vw]">
-          <button
-            onClick={() => handleCreateAgent}
-            className=" bg-[#3637EA] text-white text-center px-6 py-2.5 rounded-lg font-Ar block w-full"
-          >
-            Create Department
+        <div
+          className="relative w-full md:max-w-[400px] sm:min-w-max md:w-[100vw]"
+          onClick={() => setIsDepartmentCreate(!isDepartmentCreate)}
+        >
+          <button className=" bg-[#3637EA] text-white text-center px-6 py-2.5 rounded-lg font-Ar block w-full">
+            {isDepartmentCreate ? "Department List" : "Create Department"}
           </button>
         </div>
 
@@ -94,106 +93,110 @@ export default function Department() {
         </div>
       </div>
 
-      <div
-        className="mt-6  border-[#3048AD] bg-[#1C1C2E] p-[1px] rounded-2xl w-full  "
-        style={{
-          background: `linear-gradient(to right, #2d2d47, #3048AD) `,
-        }}
-      >
-        <div className="h-full bg-[#1C1C2E] rounded-2xl py-4 px-8 max-w-full">
-          {originalData.length ? (
-            <div className="relative">
-              <div className="relative flex justify-between mb-3 mt-1    w-full flex-col lg:flex-row bg-transparent rounded overflow-x-auto">
-                {originalData.length ? (
-                  <Grid
-                    data={originalData.map((x) => [
-                      x.departments,
-                      x.createDate,
-                      x.AgentName || " ",
-                      x._id,
-                    ])}
-                    columns={[
-                      {
-                        name: `Departments`,
-                      },
-                      {
-                        name: "Created Date",
-                        formatter: (cell) => {
-                          const date = new Date(cell);
-                          const day = date.getDate();
-                          const month = date.getMonth() + 1;
-                          const year = date.getFullYear();
-
-                          return `${month}/${day}/${year}`;
+      {isDepartmentCreate ? (
+        <CreateAgentAndDepartment make="department" />
+      ) : (
+        <div
+          className="mt-6 border-[#3048AD] bg-[#1C1C2E] p-[1px] rounded-2xl w-full"
+          style={{
+            background: `linear-gradient(to right, #2d2d47, #3048AD) `,
+          }}
+        >
+          <div className="h-full bg-[#1C1C2E] rounded-2xl py-4 px-8 max-w-full">
+            {originalData.length ? (
+              <div className="relative">
+                <div className="relative flex justify-between mb-3 mt-1    w-full flex-col lg:flex-row bg-transparent rounded overflow-x-auto">
+                  {originalData.length ? (
+                    <Grid
+                      data={originalData.map((x) => [
+                        x.departments,
+                        x.createDate,
+                        x.AgentName || " ",
+                        x._id,
+                      ])}
+                      columns={[
+                        {
+                          name: `Departments`,
                         },
-                      },
-                      {
-                        name: "Agents Name",
-                      },
-                      {
-                        name: "Actions",
-                        formatter: (cell) => {
-                          // return cell;
-                          return _(
-                            <div className="flex justify-center items-center gap-5 ">
-                              <button
-                                onClick={() => handleDelete(cell)}
-                                className="w-6 h-6 flex justify-center items-center"
-                              >
-                                <img
-                                  className="w-full h-full rounded-sm"
-                                  src={deleteIcons}
-                                />
-                              </button>
+                        {
+                          name: "Created Date",
+                          formatter: (cell) => {
+                            const date = new Date(cell);
+                            const day = date.getDate();
+                            const month = date.getMonth() + 1;
+                            const year = date.getFullYear();
 
-                              <button
-                                onClick={() => handleEdit(cell)}
-                                className="w-6 h-6 flex justify-center items-center"
-                              >
-                                <img
-                                  className="w-full h-full rounded-sm"
-                                  src={editIcons}
-                                />
-                              </button>
-
-                              <button
-                                onClick={() => handleCancel(cell)}
-                                className="w-6 h-6 flex justify-center items-center"
-                              >
-                                <img
-                                  className="w-full h-full rounded-sm"
-                                  src={cancelIcons}
-                                />
-                              </button>
-                            </div>
-                          );
+                            return `${month}/${day}/${year}`;
+                          },
                         },
-                      },
-                    ]}
-                    search={false}
-                    pagination={{
-                      limit: 10,
-                    }}
-                    className={{
-                      container: "",
-                      table:
-                        "items-center bg-transparent min-w-[80vw] lg:min-w-[70vw] border-collapse  font-Ar mt-6 mb-8 table-auto",
-                      th: "px-2 bg-blueGray-50 text-blueGray-500 align-middle py-3 text-base  bg-[#3637EA] whitespace-nowrap font-semibold text-center",
-                      td: "border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4  text-center text-[#A6A6AD]",
-                      paginationSummary: "hidden md:block",
-                      paginationButton: "border px-3 py-1 me-3 ",
-                      paginationButtonCurrent:
-                        "bg-[#3637EA] px-3 py-1 border-[#3637EA] ",
-                      paginationButtonNext: "border-none",
-                      paginationButtonPrev: "border-none",
-                    }}
-                  />
-                ) : null}
+                        {
+                          name: "Agents Name",
+                        },
+                        {
+                          name: "Actions",
+                          formatter: (cell) => {
+                            // return cell;
+                            return _(
+                              <div className="flex justify-center items-center gap-5 ">
+                                <button
+                                  onClick={() => handleDelete(cell)}
+                                  className="w-6 h-6 flex justify-center items-center"
+                                >
+                                  <img
+                                    className="w-full h-full rounded-sm"
+                                    src={deleteIcons}
+                                  />
+                                </button>
+
+                                <button
+                                  onClick={() => handleEdit(cell)}
+                                  className="w-6 h-6 flex justify-center items-center"
+                                >
+                                  <img
+                                    className="w-full h-full rounded-sm"
+                                    src={editIcons}
+                                  />
+                                </button>
+
+                                <button
+                                  onClick={() => handleCancel(cell)}
+                                  className="w-6 h-6 flex justify-center items-center"
+                                >
+                                  <img
+                                    className="w-full h-full rounded-sm"
+                                    src={cancelIcons}
+                                  />
+                                </button>
+                              </div>
+                            );
+                          },
+                        },
+                      ]}
+                      search={false}
+                      pagination={{
+                        limit: 10,
+                      }}
+                      className={{
+                        container: "",
+                        table:
+                          "items-center bg-transparent min-w-[80vw] lg:min-w-[70vw] border-collapse  font-Ar mt-6 mb-8 table-auto",
+                        th: "px-2 bg-blueGray-50 text-blueGray-500 align-middle py-3 text-base  bg-[#3637EA] whitespace-nowrap font-semibold text-center",
+                        td: "border-t-0 px-2  border-l-0 border-r-0 text-base whitespace-nowrap p-4  text-center text-[#A6A6AD]",
+                        paginationSummary: "hidden md:block",
+                        paginationButton: "border px-3 py-1 me-3 ",
+                        paginationButtonCurrent:
+                          "bg-[#3637EA] px-3 py-1 border-[#3637EA] ",
+                        paginationButtonNext: "border-none",
+                        paginationButtonPrev: "border-none",
+                      }}
+                    />
+                  ) : null}
+                </div>
               </div>
-            </div>
-          ) : null}
+            ) : null}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

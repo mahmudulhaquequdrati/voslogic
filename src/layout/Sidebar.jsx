@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar } from "../features/layout/layoutSlice";
 // import { Link } from "react-router-dom";
@@ -12,6 +12,10 @@ import MenuData from "./navbar-data/navMenuData";
 
 import logo from "../assets/logo.png";
 import sidebarUser from "../assets/sidebar-user.png";
+import {
+  switchToAgent,
+  switchToDepartment,
+} from "../features/switchAgent/switchAgent";
 
 const Sidebar = () => {
   // const navigate = useNavigate();
@@ -23,7 +27,6 @@ const Sidebar = () => {
   const location = useLocation();
 
   const currentPath = location?.pathname.slice(1) || location;
-  console.log("currentPath ", currentPath);
 
   const handleSidebar = () => {
     // handle through redux
@@ -36,6 +39,14 @@ const Sidebar = () => {
     dispatch(userLoggedOut());
     navigate("/login");
   };
+
+  useEffect(() => {
+    if (currentPath === "agents") {
+      dispatch(switchToAgent());
+    } else if (currentPath === "department") {
+      dispatch(switchToDepartment());
+    }
+  });
 
   return (
     <React.Fragment>
