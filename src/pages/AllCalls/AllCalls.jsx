@@ -259,7 +259,7 @@ export default function AllCalls() {
                   />
                 ) : null}
                 <div
-                  className={`!w-full -right-0 md:-top-0 absolute flex items-center justify-between md:justify-end lg:gap-8 md:gap-4 sm:ml-auto top-[68px]`}
+                  className={`w-full md:w-auto -right-0 md:-top-0 absolute flex items-center justify-between md:justify-end lg:gap-8 md:gap-4 sm:ml-auto top-[68px]`}
                 >
                   {/* show data layout */}
                   <div className="flex flex-row">

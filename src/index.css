@@ -22,7 +22,7 @@
   @apply relative  border border-[#1C1C2E]  p-1 ps-4 rounded-lg flex w-full md:w-6/12 lg:w-4/12 bg-[#01108D] items-center;
 }
 .gridjs-search input {
-  @apply focus:outline-none text-sm w-full pe-4  ps-8 py-2 bg-[#01108D] rounded-lg;
+  @apply outline-none text-sm w-full pe-4  ps-8 py-2 bg-[#01108D] rounded-lg;
 }
 .gridjs-search::after {
   content: "";

@@ -1,14 +1,11 @@
 import { useState } from "react";
 import Chart from "react-apexcharts";
 import { useDispatch } from "react-redux";
-import SelectList from "../../components/SelectList/SelectList";
-import Profile from "../../components/common/Profile";
 import Modal from "../../components/modal/Modal";
 import { openModal } from "../../features/modal/modalSlice";
 
 function Dashboard() {
   const [search, setSearch] = useState("");
-  const [QAType, setQAType] = useState("agent");
   const dispatch = useDispatch();
 
   const handleCloseModal = () => {
@@ -104,6 +101,7 @@ function Dashboard() {
       labels: docutSeris?.map((series) => `${series.name} ${series.value}%`),
       legend: {
         position: "right",
+        width: 160,
         labels: {
           colors: "#898C95",
         },
@@ -113,7 +111,8 @@ function Dashboard() {
           fillColors: ["#27DBBB", "#FF5C7A", "#D7D7D7", "#9279ED"],
         },
         itemMargin: {
-          vertical: 10,
+          vertical: 5,
+          horizontal: 0,
         },
       },
       tooltip: {
@@ -122,16 +121,13 @@ function Dashboard() {
       },
       responsive: [
         {
-          breakpoint: 1366,
+          breakpoint: 1250,
           options: {
-            plotOptions: {
-              bar: {
-                horizontal: false,
-              },
-            },
             legend: {
               position: "bottom",
-              horizontalAlign: "center",
+              itemMargin: {
+                vertical: 10,
+              },
             },
           },
         },
@@ -161,8 +157,8 @@ function Dashboard() {
 
   return (
     <div className="">
-      <div className="flex justify-between items-center">
-        <div className="relative  border border-[#1C1C2E]  p-1 ps-4 rounded-lg flex w-8/12 md:w-4/12 bg-[#1C1C2E] items-center">
+      <div className="flex justify-center gap-7 md:justify-between flex-col-reverse text-center md:flex-row md:items-end mb-[42px]">
+        <div className="relative  border border-[#1C1C2E]  p-1 ps-4 rounded-lg flex bg-[#1C1C2E] items-center w-full md:max-w-[400px] sm:min-w-max md:w-[100vw]">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24px"
@@ -181,7 +177,7 @@ function Dashboard() {
             ></path>
           </svg>
           <input
-            className="focus:outline-none  text-sm w-full   px-4 py-2 bg-transparent "
+            className="outline-none  text-sm w-full   px-4 py-2 bg-transparent "
             type="text"
             placeholder="Filter Your Search"
             onChange={(e) => {
@@ -190,7 +186,30 @@ function Dashboard() {
           />
           {/* <i className="ri-search-line text-blue-600"></i> */}
         </div>
-        <Profile />
+
+        {/* Current Balance */}
+        <div className="flex items-center gap-5 justify-center">
+          <span className="bg-[#3637EA] w-[58px] h-[58px] rounded-full flex items-center justify-center">
+            <svg
+              width="38"
+              height="38"
+              viewBox="0 0 38 38"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M28.1342 13.2712H34.8334C34.8334 7.89227 31.6105 4.75 26.1497 4.75H11.8505C6.38971 4.75 3.16675 7.89227 3.16675 13.2026V24.7974C3.16675 30.1077 6.38971 33.25 11.8505 33.25H26.1497C31.6105 33.25 34.8334 30.1077 34.8334 24.7974V24.3034H28.1342C25.025 24.3034 22.5045 21.8461 22.5045 18.8148C22.5045 15.7834 25.025 13.3261 28.1342 13.3261V13.2712ZM28.1342 15.6313H33.6512C34.3041 15.6313 34.8334 16.1474 34.8334 16.7839V20.7907C34.8258 21.4242 34.3009 21.9359 33.6512 21.9433H28.2608C26.6868 21.964 25.3104 20.9133 24.9534 19.4185C24.7746 18.4906 25.0256 17.5331 25.6391 16.8027C26.2526 16.0722 27.1659 15.6435 28.1342 15.6313ZM28.3734 19.8439H28.8942C29.5626 19.8439 30.1045 19.3156 30.1045 18.6638C30.1045 18.0121 29.5626 17.4838 28.8942 17.4838H28.3734C28.0537 17.4801 27.7458 17.6013 27.5184 17.8205C27.291 18.0396 27.163 18.3384 27.163 18.6501C27.163 19.3041 27.7027 19.8364 28.3734 19.8439ZM10.6682 13.2712H19.6053C20.2737 13.2712 20.8156 12.7428 20.8156 12.0911C20.8156 11.4394 20.2737 10.911 19.6053 10.911H10.6682C10.0052 10.911 9.46557 11.431 9.45786 12.0774C9.45781 12.7314 9.99749 13.2637 10.6682 13.2712Z"
+                fill="#35BE5E"
+              />
+            </svg>
+          </span>
+          <div className="text-white text-right leading-9 text-2xl">
+            <p className="font-normal"> Current Balance </p>
+            <strong className="font-bold"> $456,234,11.04 </strong>
+          </div>
+        </div>
       </div>
 
       {/* Dashboard header cards */}
@@ -443,13 +462,15 @@ function Dashboard() {
             background: `linear-gradient(to right, #2d2d47, #3048AD) `,
           }}
         >
-          <div className="flex flex-col justify-center gap-3 w-full h-full bg-[#1C1C2E] rounded-2xl p-8 md:px-8 lg:px-12">
-            <div className="donut w-full">
+          <div className="flex flex-col justify-center gap-3 w-full h-full bg-[#1C1C2E] rounded-2xl py-7">
+            <div className="w-full h-[300px] md:h-auto flex justify-center items-center">
+              {/* In the mobile and ablet mode the width of the chart would be 150px and in the desktop mode would be 400px and the height would be greater than 450px and in the desktop mode that whould be 100%*/}
               <Chart
                 options={donutOption?.options}
                 series={donutOption?.series}
                 type="donut"
-                width="100%"
+                width="400px"
+                height="100%"
               />
             </div>
           </div>
@@ -461,30 +482,35 @@ function Dashboard() {
             background: `linear-gradient(to right, #2d2d47, #3048AD) `,
           }}
         >
-          <div className="flex flex-col justify-center gap-3 w-full h-full bg-[#1C1C2E] rounded-2xl p-8 md:px-8 lg:px-12">
-            <div className="donut w-full">
+          <div className="flex flex-col justify-center gap-3 w-full h-full bg-[#1C1C2E] rounded-2xl p-2">
+            <div className="donut w-full h-[400px] md:h-auto flex justify-center items-center">
+              {/* In the mobile and ablet mode the width of the chart would be 150px and in the desktop mode would be 400px and the height would be greater than 450px and in the desktop mode that whould be 100%*/}
               <Chart
                 options={donutOption?.options}
                 series={donutOption?.series}
                 type="donut"
-                width="100%"
+                width="400px"
+                height="100%"
               />
             </div>
           </div>
         </div>
+
         <div
           className="overflow-hidden w-full md:w-3/6 border-[#3048AD] bg-[#1C1C2E] p-[1px] rounded-2xl"
           style={{
             background: `linear-gradient(to right, #2d2d47, #3048AD) `,
           }}
         >
-          <div className="flex flex-col justify-center gap-3 w-full h-full bg-[#1C1C2E] rounded-2xl p-8 md:px-8 lg:px-12">
-            <div className="donut w-full">
+          <div className="flex flex-col justify-center gap-3 w-full h-full bg-[#1C1C2E] rounded-2xl p-2">
+            <div className="donut w-[150px] h-[300px] md:w-[400px] md:h-auto flex justify-center items-center">
+              {/* In the mobile and ablet mode the width of the chart would be 150px and in the desktop mode would be 400px and the height would be greater than 450px and in the desktop mode that whould be 100%*/}
               <Chart
                 options={donutOption?.options}
                 series={donutOption?.series}
                 type="donut"
-                width="100%"
+                width="400px"
+                height="100%"
               />
             </div>
           </div>
@@ -506,232 +532,6 @@ function Dashboard() {
             width="100%"
             height="100%"
           />
-        </div>
-      </div>
-
-      {/* Create agents and Department component  */}
-      <div
-        className="mt-6 overflow-hidden border-[#3048AD] bg-[#1C1C2E] p-[1px] rounded-2xl"
-        style={{
-          background: `linear-gradient(to right, #2d2d47, #3048AD) `,
-        }}
-      >
-        <div className="w-full bg-[#1C1C2E] rounded-2xl pt-8 px-6 md:px-12 md:pb-[150px] flex flex-col items-center">
-          <div className="max-w-[585px] w-full flex items-center gap-2 mb-32">
-            {/* Department tab  */}
-            <div
-              className="flex items-center gap-5 py-5 px-2 md:px-8 border-b-[3px] border-transparent hover:border-[#3637EA]"
-              onClick={() => setQAType("department")}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="22"
-                height="23"
-                viewBox="0 0 22 23"
-                fill="none"
-              >
-                <path
-                  d="M6.37145 9.70172V16.5619"
-                  stroke="#9CA3AF"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M11.0382 6.41913V16.5618"
-                  stroke="#9CA3AF"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M15.6285 13.3268V16.5619"
-                  stroke="#9CA3AF"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M15.6857 1.5H6.31429C3.04762 1.5 1 3.81208 1 7.08516V15.9148C1 19.1879 3.0381 21.5 6.31429 21.5H15.6857C18.9619 21.5 21 19.1879 21 15.9148V7.08516C21 3.81208 18.9619 1.5 15.6857 1.5Z"
-                  stroke="#9CA3AF"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <span
-                className={`text-[#9CA3AF] font-Tw text-[18px] ${
-                  QAType === "department" && "text-[#3637EA]"
-                }`}
-              >
-                Department
-              </span>
-            </div>
-
-            {/* Agent tab  */}
-            <div
-              className={`flex items-center gap-5 py-5 px-8 border-b-[3px] border-transparent ${
-                QAType === "agent" && "border-[#3637EA]"
-              }`}
-              onClick={() => setQAType("agent")}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="22"
-                height="17"
-                viewBox="0 0 22 17"
-                fill="none"
-              >
-                <path
-                  d="M16.8877 7.39667C18.2827 7.20067 19.3567 6.00467 19.3597 4.55567C19.3597 3.12767 18.3187 1.94367 16.9537 1.71967"
-                  stroke="#9CA3AF"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M18.7285 10.7503C20.0795 10.9523 21.0225 11.4253 21.0225 12.4003C21.0225 13.0713 20.5785 13.5073 19.8605 13.7813"
-                  stroke="#9CA3AF"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M10.8867 11.1638C7.67273 11.1638 4.92773 11.6508 4.92773 13.5958C4.92773 15.5398 7.65573 16.0408 10.8867 16.0408C14.1007 16.0408 16.8447 15.5588 16.8447 13.6128C16.8447 11.6668 14.1177 11.1638 10.8867 11.1638Z"
-                  stroke="#9CA3AF"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M10.8869 8.38788C12.9959 8.38788 14.7059 6.67888 14.7059 4.56888C14.7059 2.45988 12.9959 0.749878 10.8869 0.749878C8.7779 0.749878 7.0679 2.45988 7.0679 4.56888C7.0599 6.67088 8.7569 8.38088 10.8589 8.38788H10.8869Z"
-                  stroke="#9CA3AF"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M4.88484 7.39667C3.48884 7.20067 2.41584 6.00467 2.41284 4.55567C2.41284 3.12767 3.45384 1.94367 4.81884 1.71967"
-                  stroke="#9CA3AF"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M3.044 10.7503C1.693 10.9523 0.75 11.4253 0.75 12.4003C0.75 13.0713 1.194 13.5073 1.912 13.7813"
-                  stroke="#9CA3AF"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-              <span
-                className={`text-[#9CA3AF] font-Tw text-[18px] ${
-                  QAType === "agent" && "text-[#3637EA]"
-                }`}
-              >
-                Agents
-              </span>
-            </div>
-          </div>
-          {/* Create agent form and Department form*/}
-          {QAType === "agent" ? (
-            <div className="max-w-[585px] w-full bg-[#1C1C2E] rounded-2xl pt-8 px-6 md:px-12 pb-44">
-              <div className="flex flex-col gap-6">
-                <div>
-                  <input
-                    type="text"
-                    placeholder="First Name"
-                    className="w-full bg-transparent border-[1px] border-[#0070D2] outline-none rounded-[10px] px-[18px] py-[10px] placeholder:font-Tw text-[18px] placeholder:italic"
-                  />
-                </div>
-
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Last Name"
-                    className="w-full bg-transparent border-[1px] border-[#0070D2] outline-none rounded-[10px] px-[18px] py-[10px] placeholder:font-Tw text-[18px] placeholder:italic"
-                  />
-                </div>
-
-                <SelectList />
-
-                <div>
-                  <button className="w-full bg-[#3637EA] font-bold outline-none rounded-[10px] px-[18px] py-[10px] capitalize   font-Tw text-[18px]">
-                    Create agent
-                  </button>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="max-w-[950px] w-full flex flex-col items-center gap-4">
-              <div className="w-full flex flex-col justify-center sm:flex-row gap-4 ">
-                <div className="w-full flex sm:items-stretch flex-col gap-6">
-                  <div className="w-full">
-                    <input
-                      type="text"
-                      placeholder="First Name"
-                      className="w-full bg-transparent border-[1px] border-[#0070D2] outline-none rounded-[10px] px-[18px] py-[10px] placeholder:font-Tw text-[18px] placeholder:italic"
-                    />
-                  </div>
-
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Last Name"
-                      className="w-full bg-transparent border-[1px] border-[#0070D2] outline-none rounded-[10px] px-[18px] py-[10px] placeholder:font-Tw text-[18px] placeholder:italic"
-                    />
-                  </div>
-
-                  <SelectList />
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Flagged Words"
-                      className="w-full bg-transparent border-[1px] border-[#0070D2] outline-none rounded-[10px] px-[18px] py-[10px] placeholder:font-Tw text-[18px] placeholder:italic"
-                    />
-                  </div>
-                </div>
-                <div className="w-full flex sm:items-stretch flex-col gap-6">
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Department Leader First Name"
-                      className="w-full bg-transparent border-[1px] border-[#0070D2] outline-none rounded-[10px] px-[18px] py-[10px] placeholder:font-Tw text-[18px] placeholder:italic"
-                    />
-                  </div>
-
-                  <div>
-                    <input
-                      type="email"
-                      placeholder="Department Leader Email"
-                      className="w-full bg-transparent border-[1px] border-[#0070D2] outline-none rounded-[10px] px-[18px] py-[10px] placeholder:font-Tw text-[18px] placeholder:italic"
-                    />
-                  </div>
-
-                  <div className="flex h-full">
-                    <textarea
-                      type="text"
-                      placeholder="Prompt"
-                      className="w-full bg-transparent border-[1px] border-[#0070D2] outline-none rounded-[10px] px-[18px] py-[10px] placeholder:font-Tw text-[18px] placeholder:italic"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="w-full sm:w-[80%]">
-                <button className="w-full bg-[#3637EA] font-bold outline-none rounded-[10px] px-[18px] py-[10px] capitalize   font-Tw text-[18px]">
-                  Create Department
-                </button>
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
