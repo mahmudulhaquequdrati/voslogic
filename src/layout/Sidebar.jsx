@@ -69,7 +69,7 @@ const Sidebar = () => {
       >
         <img src={logo} className="mt-10 w-4/6 mx-auto" alt="" />
         {/* top Nav Items */}
-        <ul className="mt-6 max-h-80 overflow-y-scroll">
+        <ul className="mt-6">
           {menuData.map((item) => {
             return (
               <li

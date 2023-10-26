@@ -1,6 +1,5 @@
 import { Grid, _ } from "gridjs-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import cancelIcons from "../../assets/cancel_icons.png";
 import deleteIcons from "../../assets/delete_icons.png";
 import editIcons from "../../assets/edit_icons.png";
@@ -139,29 +138,32 @@ export default function Agents() {
                             <div className="flex justify-center items-center gap-5 ">
                               <button
                                 onClick={() => handleDelete(cell)}
-                                className="w-8 h-8 flex justify-center items-center"
+                                className="w-6 h-6 flex justify-center items-center"
                               >
                                 <img
-                                  className="w-8 h-8 rounded-sm"
+                                  className="w-full h-full rounded-sm"
                                   src={deleteIcons}
                                 />
                               </button>
 
                               <button
-                                className="w-8 h-8 flex justify-center items-center"
                                 onClick={() => handleEdit(cell)}
+                                className="w-6 h-6 flex justify-center items-center"
                               >
                                 <img
-                                  className="w-8 h-8 rounded-sm"
+                                  className="w-full h-full rounded-sm"
                                   src={editIcons}
                                 />
                               </button>
 
                               <button
-                                className="w-8 h-8 flex justify-center items-center "
                                 onClick={() => handleCancel(cell)}
+                                className="w-6 h-6 flex justify-center items-center"
                               >
-                                <img className="rounded-sm" src={cancelIcons} />
+                                <img
+                                  className="w-full h-full rounded-sm"
+                                  src={cancelIcons}
+                                />
                               </button>
                             </div>
                           );

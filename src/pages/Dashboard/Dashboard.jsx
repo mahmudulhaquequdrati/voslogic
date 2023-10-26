@@ -2,7 +2,6 @@ import { useState } from "react";
 import Chart from "react-apexcharts";
 import { useDispatch } from "react-redux";
 import SelectList from "../../components/SelectList/SelectList";
-import Profile from "../../components/common/Profile";
 import Modal from "../../components/modal/Modal";
 import { openModal } from "../../features/modal/modalSlice";
 
@@ -161,8 +160,8 @@ function Dashboard() {
 
   return (
     <div className="">
-      <div className="flex justify-between items-center">
-        <div className="relative  border border-[#1C1C2E]  p-1 ps-4 rounded-lg flex w-8/12 md:w-4/12 bg-[#1C1C2E] items-center">
+      <div className="flex justify-center gap-7 md:justify-between flex-col-reverse text-center md:flex-row md:items-end mb-[42px]">
+        <div className="relative  border border-[#1C1C2E]  p-1 ps-4 rounded-lg flex bg-[#1C1C2E] items-center w-full md:max-w-[400px] sm:min-w-max md:w-[100vw]">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24px"
@@ -181,7 +180,7 @@ function Dashboard() {
             ></path>
           </svg>
           <input
-            className="focus:outline-none  text-sm w-full   px-4 py-2 bg-transparent "
+            className="outline-none  text-sm w-full   px-4 py-2 bg-transparent "
             type="text"
             placeholder="Filter Your Search"
             onChange={(e) => {
@@ -190,7 +189,30 @@ function Dashboard() {
           />
           {/* <i className="ri-search-line text-blue-600"></i> */}
         </div>
-        <Profile />
+
+        {/* Current Balance */}
+        <div className="flex items-center gap-5 justify-center">
+          <span className="bg-[#3637EA] w-[58px] h-[58px] rounded-full flex items-center justify-center">
+            <svg
+              width="38"
+              height="38"
+              viewBox="0 0 38 38"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M28.1342 13.2712H34.8334C34.8334 7.89227 31.6105 4.75 26.1497 4.75H11.8505C6.38971 4.75 3.16675 7.89227 3.16675 13.2026V24.7974C3.16675 30.1077 6.38971 33.25 11.8505 33.25H26.1497C31.6105 33.25 34.8334 30.1077 34.8334 24.7974V24.3034H28.1342C25.025 24.3034 22.5045 21.8461 22.5045 18.8148C22.5045 15.7834 25.025 13.3261 28.1342 13.3261V13.2712ZM28.1342 15.6313H33.6512C34.3041 15.6313 34.8334 16.1474 34.8334 16.7839V20.7907C34.8258 21.4242 34.3009 21.9359 33.6512 21.9433H28.2608C26.6868 21.964 25.3104 20.9133 24.9534 19.4185C24.7746 18.4906 25.0256 17.5331 25.6391 16.8027C26.2526 16.0722 27.1659 15.6435 28.1342 15.6313ZM28.3734 19.8439H28.8942C29.5626 19.8439 30.1045 19.3156 30.1045 18.6638C30.1045 18.0121 29.5626 17.4838 28.8942 17.4838H28.3734C28.0537 17.4801 27.7458 17.6013 27.5184 17.8205C27.291 18.0396 27.163 18.3384 27.163 18.6501C27.163 19.3041 27.7027 19.8364 28.3734 19.8439ZM10.6682 13.2712H19.6053C20.2737 13.2712 20.8156 12.7428 20.8156 12.0911C20.8156 11.4394 20.2737 10.911 19.6053 10.911H10.6682C10.0052 10.911 9.46557 11.431 9.45786 12.0774C9.45781 12.7314 9.99749 13.2637 10.6682 13.2712Z"
+                fill="#35BE5E"
+              />
+            </svg>
+          </span>
+          <div className="text-white text-right leading-9 text-2xl">
+            <p className="font-normal"> Current Balance </p>
+            <strong className="font-bold"> $456,234,11.04 </strong>
+          </div>
+        </div>
       </div>
 
       {/* Dashboard header cards */}

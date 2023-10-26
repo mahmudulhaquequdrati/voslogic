@@ -138,23 +138,32 @@ export default function Review() {
                             <div className="flex justify-center items-center gap-5 ">
                               <button
                                 onClick={() => handleDelete(cell)}
-                                className="text-3xl flex justify-center items-center"
+                                className="w-6 h-6 flex justify-center items-center"
                               >
-                                <img src={deleteIcons} />
+                                <img
+                                  className="w-full h-full rounded-sm"
+                                  src={deleteIcons}
+                                />
                               </button>
 
                               <button
-                                className="text-2xl flex justify-center items-center"
                                 onClick={() => handleEdit(cell)}
+                                className="w-6 h-6 flex justify-center items-center"
                               >
-                                <img src={editIcons} />
+                                <img
+                                  className="w-full h-full rounded-sm"
+                                  src={editIcons}
+                                />
                               </button>
 
                               <button
-                                className="text-3xl flex justify-center items-center"
                                 onClick={() => handleCancel(cell)}
+                                className="w-6 h-6 flex justify-center items-center"
                               >
-                                <img src={cancelIcons} />
+                                <img
+                                  className="w-full h-full rounded-sm"
+                                  src={cancelIcons}
+                                />
                               </button>
                             </div>
                           );
