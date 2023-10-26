@@ -1,14 +1,12 @@
 import { useState } from "react";
 import Chart from "react-apexcharts";
 import { useDispatch } from "react-redux";
-import SelectList from "../../components/SelectList/SelectList";
 import Profile from "../../components/common/Profile";
 import Modal from "../../components/modal/Modal";
 import { openModal } from "../../features/modal/modalSlice";
 
 function Dashboard() {
   const [search, setSearch] = useState("");
-  const [QAType, setQAType] = useState("agent");
   const dispatch = useDispatch();
 
   const handleCloseModal = () => {
@@ -104,6 +102,7 @@ function Dashboard() {
       labels: docutSeris?.map((series) => `${series.name} ${series.value}%`),
       legend: {
         position: "right",
+        width: 160,
         labels: {
           colors: "#898C95",
         },
@@ -113,7 +112,8 @@ function Dashboard() {
           fillColors: ["#27DBBB", "#FF5C7A", "#D7D7D7", "#9279ED"],
         },
         itemMargin: {
-          vertical: 10,
+          vertical: 5,
+          horizontal: 0,
         },
       },
       tooltip: {
@@ -122,16 +122,13 @@ function Dashboard() {
       },
       responsive: [
         {
-          breakpoint: 1366,
+          breakpoint: 1250,
           options: {
-            plotOptions: {
-              bar: {
-                horizontal: false,
-              },
-            },
             legend: {
               position: "bottom",
-              horizontalAlign: "center",
+              itemMargin: {
+                vertical: 10,
+              },
             },
           },
         },
@@ -443,13 +440,15 @@ function Dashboard() {
             background: `linear-gradient(to right, #2d2d47, #3048AD) `,
           }}
         >
-          <div className="flex flex-col justify-center gap-3 w-full h-full bg-[#1C1C2E] rounded-2xl p-8 md:px-8 lg:px-12">
-            <div className="donut w-full">
+          <div className="flex flex-col justify-center gap-3 w-full h-full bg-[#1C1C2E] rounded-2xl py-7">
+            <div className="w-full h-[300px] md:h-auto flex justify-center items-center">
+              {/* In the mobile and ablet mode the width of the chart would be 150px and in the desktop mode would be 400px and the height would be greater than 450px and in the desktop mode that whould be 100%*/}
               <Chart
                 options={donutOption?.options}
                 series={donutOption?.series}
                 type="donut"
-                width="100%"
+                width="400px"
+                height="100%"
               />
             </div>
           </div>
@@ -461,30 +460,35 @@ function Dashboard() {
             background: `linear-gradient(to right, #2d2d47, #3048AD) `,
           }}
         >
-          <div className="flex flex-col justify-center gap-3 w-full h-full bg-[#1C1C2E] rounded-2xl p-8 md:px-8 lg:px-12">
-            <div className="donut w-full">
+          <div className="flex flex-col justify-center gap-3 w-full h-full bg-[#1C1C2E] rounded-2xl p-2">
+            <div className="donut w-full h-[400px] md:h-auto flex justify-center items-center">
+              {/* In the mobile and ablet mode the width of the chart would be 150px and in the desktop mode would be 400px and the height would be greater than 450px and in the desktop mode that whould be 100%*/}
               <Chart
                 options={donutOption?.options}
                 series={donutOption?.series}
                 type="donut"
-                width="100%"
+                width="400px"
+                height="100%"
               />
             </div>
           </div>
         </div>
+
         <div
           className="overflow-hidden w-full md:w-3/6 border-[#3048AD] bg-[#1C1C2E] p-[1px] rounded-2xl"
           style={{
             background: `linear-gradient(to right, #2d2d47, #3048AD) `,
           }}
         >
-          <div className="flex flex-col justify-center gap-3 w-full h-full bg-[#1C1C2E] rounded-2xl p-8 md:px-8 lg:px-12">
-            <div className="donut w-full">
+          <div className="flex flex-col justify-center gap-3 w-full h-full bg-[#1C1C2E] rounded-2xl p-2">
+            <div className="donut w-[150px] h-[300px] md:w-[400px] md:h-auto flex justify-center items-center">
+              {/* In the mobile and ablet mode the width of the chart would be 150px and in the desktop mode would be 400px and the height would be greater than 450px and in the desktop mode that whould be 100%*/}
               <Chart
                 options={donutOption?.options}
                 series={donutOption?.series}
                 type="donut"
-                width="100%"
+                width="400px"
+                height="100%"
               />
             </div>
           </div>
@@ -506,232 +510,6 @@ function Dashboard() {
             width="100%"
             height="100%"
           />
-        </div>
-      </div>
-
-      {/* Create agents and Department component  */}
-      <div
-        className="mt-6 overflow-hidden border-[#3048AD] bg-[#1C1C2E] p-[1px] rounded-2xl"
-        style={{
-          background: `linear-gradient(to right, #2d2d47, #3048AD) `,
-        }}
-      >
-        <div className="w-full bg-[#1C1C2E] rounded-2xl pt-8 px-6 md:px-12 md:pb-[150px] flex flex-col items-center">
-          <div className="max-w-[585px] w-full flex items-center gap-2 mb-32">
-            {/* Department tab  */}
-            <div
-              className="flex items-center gap-5 py-5 px-2 md:px-8 border-b-[3px] border-transparent hover:border-[#3637EA]"
-              onClick={() => setQAType("department")}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="22"
-                height="23"
-                viewBox="0 0 22 23"
-                fill="none"
-              >
-                <path
-                  d="M6.37145 9.70172V16.5619"
-                  stroke="#9CA3AF"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M11.0382 6.41913V16.5618"
-                  stroke="#9CA3AF"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M15.6285 13.3268V16.5619"
-                  stroke="#9CA3AF"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M15.6857 1.5H6.31429C3.04762 1.5 1 3.81208 1 7.08516V15.9148C1 19.1879 3.0381 21.5 6.31429 21.5H15.6857C18.9619 21.5 21 19.1879 21 15.9148V7.08516C21 3.81208 18.9619 1.5 15.6857 1.5Z"
-                  stroke="#9CA3AF"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <span
-                className={`text-[#9CA3AF] font-Tw text-[18px] ${
-                  QAType === "department" && "text-[#3637EA]"
-                }`}
-              >
-                Department
-              </span>
-            </div>
-
-            {/* Agent tab  */}
-            <div
-              className={`flex items-center gap-5 py-5 px-8 border-b-[3px] border-transparent ${
-                QAType === "agent" && "border-[#3637EA]"
-              }`}
-              onClick={() => setQAType("agent")}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="22"
-                height="17"
-                viewBox="0 0 22 17"
-                fill="none"
-              >
-                <path
-                  d="M16.8877 7.39667C18.2827 7.20067 19.3567 6.00467 19.3597 4.55567C19.3597 3.12767 18.3187 1.94367 16.9537 1.71967"
-                  stroke="#9CA3AF"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M18.7285 10.7503C20.0795 10.9523 21.0225 11.4253 21.0225 12.4003C21.0225 13.0713 20.5785 13.5073 19.8605 13.7813"
-                  stroke="#9CA3AF"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M10.8867 11.1638C7.67273 11.1638 4.92773 11.6508 4.92773 13.5958C4.92773 15.5398 7.65573 16.0408 10.8867 16.0408C14.1007 16.0408 16.8447 15.5588 16.8447 13.6128C16.8447 11.6668 14.1177 11.1638 10.8867 11.1638Z"
-                  stroke="#9CA3AF"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M10.8869 8.38788C12.9959 8.38788 14.7059 6.67888 14.7059 4.56888C14.7059 2.45988 12.9959 0.749878 10.8869 0.749878C8.7779 0.749878 7.0679 2.45988 7.0679 4.56888C7.0599 6.67088 8.7569 8.38088 10.8589 8.38788H10.8869Z"
-                  stroke="#9CA3AF"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M4.88484 7.39667C3.48884 7.20067 2.41584 6.00467 2.41284 4.55567C2.41284 3.12767 3.45384 1.94367 4.81884 1.71967"
-                  stroke="#9CA3AF"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M3.044 10.7503C1.693 10.9523 0.75 11.4253 0.75 12.4003C0.75 13.0713 1.194 13.5073 1.912 13.7813"
-                  stroke="#9CA3AF"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-              <span
-                className={`text-[#9CA3AF] font-Tw text-[18px] ${
-                  QAType === "agent" && "text-[#3637EA]"
-                }`}
-              >
-                Agents
-              </span>
-            </div>
-          </div>
-          {/* Create agent form and Department form*/}
-          {QAType === "agent" ? (
-            <div className="max-w-[585px] w-full bg-[#1C1C2E] rounded-2xl pt-8 px-6 md:px-12 pb-44">
-              <div className="flex flex-col gap-6">
-                <div>
-                  <input
-                    type="text"
-                    placeholder="First Name"
-                    className="w-full bg-transparent border-[1px] border-[#0070D2] outline-none rounded-[10px] px-[18px] py-[10px] placeholder:font-Tw text-[18px] placeholder:italic"
-                  />
-                </div>
-
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Last Name"
-                    className="w-full bg-transparent border-[1px] border-[#0070D2] outline-none rounded-[10px] px-[18px] py-[10px] placeholder:font-Tw text-[18px] placeholder:italic"
-                  />
-                </div>
-
-                <SelectList />
-
-                <div>
-                  <button className="w-full bg-[#3637EA] font-bold outline-none rounded-[10px] px-[18px] py-[10px] capitalize   font-Tw text-[18px]">
-                    Create agent
-                  </button>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="max-w-[950px] w-full flex flex-col items-center gap-4">
-              <div className="w-full flex flex-col justify-center sm:flex-row gap-4 ">
-                <div className="w-full flex sm:items-stretch flex-col gap-6">
-                  <div className="w-full">
-                    <input
-                      type="text"
-                      placeholder="First Name"
-                      className="w-full bg-transparent border-[1px] border-[#0070D2] outline-none rounded-[10px] px-[18px] py-[10px] placeholder:font-Tw text-[18px] placeholder:italic"
-                    />
-                  </div>
-
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Last Name"
-                      className="w-full bg-transparent border-[1px] border-[#0070D2] outline-none rounded-[10px] px-[18px] py-[10px] placeholder:font-Tw text-[18px] placeholder:italic"
-                    />
-                  </div>
-
-                  <SelectList />
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Flagged Words"
-                      className="w-full bg-transparent border-[1px] border-[#0070D2] outline-none rounded-[10px] px-[18px] py-[10px] placeholder:font-Tw text-[18px] placeholder:italic"
-                    />
-                  </div>
-                </div>
-                <div className="w-full flex sm:items-stretch flex-col gap-6">
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Department Leader First Name"
-                      className="w-full bg-transparent border-[1px] border-[#0070D2] outline-none rounded-[10px] px-[18px] py-[10px] placeholder:font-Tw text-[18px] placeholder:italic"
-                    />
-                  </div>
-
-                  <div>
-                    <input
-                      type="email"
-                      placeholder="Department Leader Email"
-                      className="w-full bg-transparent border-[1px] border-[#0070D2] outline-none rounded-[10px] px-[18px] py-[10px] placeholder:font-Tw text-[18px] placeholder:italic"
-                    />
-                  </div>
-
-                  <div className="flex h-full">
-                    <textarea
-                      type="text"
-                      placeholder="Prompt"
-                      className="w-full bg-transparent border-[1px] border-[#0070D2] outline-none rounded-[10px] px-[18px] py-[10px] placeholder:font-Tw text-[18px] placeholder:italic"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="w-full sm:w-[80%]">
-                <button className="w-full bg-[#3637EA] font-bold outline-none rounded-[10px] px-[18px] py-[10px] capitalize   font-Tw text-[18px]">
-                  Create Department
-                </button>
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
