@@ -1,16 +1,9 @@
 import { useState } from "react";
 import Chart from "react-apexcharts";
 import { useDispatch } from "react-redux";
-import Modal from "../../components/modal/Modal";
-import { openModal } from "../../features/modal/modalSlice";
 
 function Dashboard() {
   const [search, setSearch] = useState("");
-  const dispatch = useDispatch();
-
-  const handleCloseModal = () => {
-    dispatch(openModal());
-  };
 
   const options = {
     xaxis: {
@@ -257,10 +250,7 @@ function Dashboard() {
                   15
                 </h1>
                 <div className="flex items-center justify-center bg-[#3637EA] rounded-full ">
-                  <span
-                    className="flex items-center justify-center h-[56px] w-[56px] "
-                    onClick={() => handleCloseModal()}
-                  >
+                  <span className="flex items-center justify-center h-[56px] w-[56px] ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -340,10 +330,7 @@ function Dashboard() {
                   15
                 </h1>
                 <div className="flex items-center justify-center bg-[#3637EA] rounded-full ">
-                  <span
-                    className="flex items-center justify-center h-[56px] w-[56px] "
-                    onClick={() => handleCloseModal()}
-                  >
+                  <span className="flex items-center justify-center h-[56px] w-[56px] ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
@@ -418,10 +405,7 @@ function Dashboard() {
                   1h30m
                 </h1>
                 <div className="flex items-center justify-center bg-[#3637EA] rounded-full ">
-                  <span
-                    className="flex items-center justify-center h-[56px] w-[56px] "
-                    onClick={() => handleCloseModal()}
-                  >
+                  <span className="flex items-center justify-center h-[56px] w-[56px] ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
@@ -534,8 +518,6 @@ function Dashboard() {
           />
         </div>
       </div>
-
-      <Modal />
     </div>
   );
 }

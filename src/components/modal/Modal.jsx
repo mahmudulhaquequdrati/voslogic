@@ -488,7 +488,7 @@ const Modal = () => {
 
   return (
     <div
-      className={`max-w-[865px] w-full md:max-w-full min-h-[500px] h-auto fixed top-[200px] right-[200px] md:right-0 md:top-[100px] z-[3000] bg-[#3637EA] ${
+      className={` w-full md:max-w-[865px] min-h-[500px] h-auto fixed top-[200px] right-[200px] md:right-[200px] md:top-[100px] z-[3000] bg-[#3637EA] ${
         isOpenModal ? "block" : "hidden"
       }`}
     >

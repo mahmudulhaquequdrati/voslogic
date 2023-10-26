@@ -1,10 +1,17 @@
 import { Grid, _ } from "gridjs-react";
 import { useState } from "react";
-
+import Modal from "../../components/modal/Modal";
+import { openModal } from "../../features/modal/modalSlice";
+import { useDispatch } from "react-redux";
 // import { toggleApi } from "../../features/layout/layoutSlice";
 // import { useDispatch } from "react-redux";
 
 export default function Failed() {
+  const dispatch = useDispatch();
+
+  const handleCloseModal = () => {
+    dispatch(openModal());
+  };
   const [originalData, setOriginalData] = useState([
     {
       departments: "Sales",
@@ -99,6 +106,7 @@ export default function Failed() {
 
   return (
     <div className="">
+      <Modal />
       <div className="flex justify-start items-center">
         <h1 className="text-2xl font-bold"> Failed </h1>
       </div>
@@ -200,7 +208,10 @@ export default function Failed() {
                         formatter: (cell) => {
                           // return cell;
                           return _(
-                            <div className="flex justify-center items-center">
+                            <div
+                              onClick={() => handleCloseModal()}
+                              className="flex justify-center items-center"
+                            >
                               <div className="flex justify-center items-center p-2 h-10 w-10 rounded-full">
                                 <button className="text-[#3637EA]">
                                   <svg

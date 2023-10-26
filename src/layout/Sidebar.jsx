@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar } from "../features/layout/layoutSlice";
 // import { Link } from "react-router-dom";
@@ -47,7 +47,7 @@ const Sidebar = () => {
       dispatch(switchToDepartment());
     }
   });
-
+  const [childrenView, setChildrenView] = useState(false);
   return (
     <React.Fragment>
       <button
@@ -82,30 +82,72 @@ const Sidebar = () => {
         {/* top Nav Items */}
         <ul className="mt-6">
           {menuData.map((item) => {
-            return (
-              <li
-                className={`my-1 font-Dm text-lg py-1.5 flex items-center ${
-                  currentPath === item.id
-                    ? "bg-[#3637EA] text-white"
-                    : "text-[#949BAD]"
-                }`}
-                key={item.id}
-                onClick={() => {
-                  item.click();
-                }}
-              >
+            if (item?.children) {
+              return (
+                <>
+                  <li
+                    onClick={() => setChildrenView(!childrenView)}
+                    className="text-white cursor-pointer hover:text-gray-200 px-6 ms-[10px] mt-2"
+                  >
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center">
+                        {item.icon && item.icon}
+                        <p className="ml-2">{item.label}</p>
+                      </div>
+                      <div>{dropicon}</div>
+                    </div>
+                  </li>
+                  {(childrenView ||
+                    item?.children?.some(
+                      (res) => res?.link === location.pathname
+                    )) && (
+                    <div className="mt-3">
+                      {item?.children?.map((child, i) => (
+                        <Link
+                          to={child.link}
+                          className={`my-1 font-Dm text-lg py-1.5 pl-10 flex items-center ${
+                            currentPath === child.id
+                              ? "bg-[#3637EA] text-white"
+                              : "text-[#949BAD]"
+                          }`}
+                          key={child.id}
+                          onClick={() => {
+                            child.click();
+                          }}
+                        >
+                          <li className="flex items-center  hover:text-gray-200 px-6 ms-2">
+                            <span className="ml-2">{child.label}</span>
+                          </li>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </>
+              );
+            } else {
+              return (
                 <Link
                   to={item.link}
-                  className="flex items-center  hover:text-gray-200 px-6 ms-2"
+                  className={`my-1 font-Dm text-lg py-1.5 flex items-center ${
+                    currentPath === item.id
+                      ? "bg-[#3637EA] text-white"
+                      : "text-[#949BAD]"
+                  }`}
+                  key={item.id}
+                  onClick={() => {
+                    item.click();
+                  }}
                 >
-                  {
-                    item.icon && item.icon
-                    // <img src={item.icon} alt="" className="w-4 h-4" />
-                  }
-                  <span className="ml-2">{item.label}</span>
+                  <li className="flex items-center  hover:text-gray-200 px-6 ms-2">
+                    {
+                      item.icon && item.icon
+                      // <img src={item.icon} alt="" className="w-4 h-4" />
+                    }
+                    <span className="ml-2">{item.label}</span>
+                  </li>
                 </Link>
-              </li>
-            );
+              );
+            }
           })}
         </ul>
 
@@ -208,3 +250,20 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+const dropicon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke-width="1.5"
+    stroke="currentColor"
+    class="w-6 h-6"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+    />
+  </svg>
+);
