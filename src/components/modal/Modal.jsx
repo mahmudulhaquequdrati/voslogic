@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AIBOTIMAGE from "../../assets/ModalImage/ai_bot.png";
 import audio from "../../assets/ModalImage/audio.png";
 import { closeModal } from "../../features/modal/modalSlice";
+import Draggable from "react-draggable";
 
 const Modal = () => {
   const [modalContent, setModalContent] = useState("callTranscript");
@@ -487,314 +488,318 @@ const Modal = () => {
   }
 
   return (
-    <div
-      className={` w-full md:max-w-[865px] min-h-[500px] h-auto fixed top-[200px] right-[200px] md:right-[200px] md:top-[100px] z-[3000] bg-[#3637EA] ${
-        isOpenModal ? "block" : "hidden"
-      }`}
-    >
-      <div className="flex justify-end gap-2 items-center bg-[#D9D9D9] p-2">
-        <span className="text-[#1C1C2E] font-bold">{modalTitle}</span>
+    <Draggable>
+      <div
+        className={`cursor-grabbing w-full md:max-w-[865px] min-h-[500px] h-auto fixed top-[200px] right-[200px] md:right-[200px] md:top-[100px] z-[3000] bg-[#3637EA] ${
+          isOpenModal ? "block" : "hidden"
+        }`}
+      >
+        <div className="flex justify-end gap-2 items-center bg-[#D9D9D9] p-2">
+          <span className="text-[#1C1C2E] font-bold">{modalTitle}</span>
 
-        <span onClick={() => handleCloseModal()} className="cursor-pointer">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="14"
-            height="14"
-            viewBox="0 0 14 14"
-            fill="none"
-          >
-            <path
-              d="M8.39738 5.59702L5.60205 8.39235"
-              stroke="#130F26"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M8.39825 8.39404L5.60059 5.59579"
-              stroke="#130F26"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M9.52849 1.60428H4.47158C2.70933 1.60428 1.60449 2.85203 1.60449 4.61778V9.38245C1.60449 11.1482 2.70408 12.3959 4.47158 12.3959H9.52791C11.296 12.3959 12.3962 11.1482 12.3962 9.38245V4.61778C12.3962 2.85203 11.296 1.60428 9.52849 1.60428Z"
-              stroke="#130F26"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </span>
-      </div>
-      <div className="w-full border-[1px] border-[#454CCA]">
-        {/* Menu items  */}
-        <div className="flex items-center m-0 p-0">
-          <div
-            onClick={() => handleSetModalContent("callTranscript")}
-            className={`flex grow items-center gap-2 py-2 px-3 border-x-[1px] border-[#454CCA] cursor-pointer ${
-              modalContent === "callTranscript"
-                ? "bg-[#1C1C2E]"
-                : "bg-[#2931C2]"
-            }`}
-          >
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="27"
-                height="26"
-                viewBox="0 0 27 26"
-                fill="none"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M22.0444 21.2482C18.3515 24.8141 12.8833 25.5845 8.40842 23.5864C7.74782 23.3296 7.20621 23.122 6.69133 23.122C5.25718 23.1302 3.47208 24.4728 2.54431 23.5781C1.61655 22.6823 3.0082 20.9574 3.0082 19.5643C3.0082 19.0671 2.80176 18.5535 2.53581 17.9145C0.465341 13.5946 1.26439 8.31314 4.95723 4.74841C9.67135 0.195173 17.3303 0.195173 22.0444 4.74724C26.767 9.30751 26.7585 16.6961 22.0444 21.2482Z"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M18.2599 13.4818H18.2707"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M13.4156 13.4818H13.4265"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M8.57139 13.4818H8.58226"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-            <span className="text-white font-bold text-[10px] sm:text-[15px] leading-6">
-              Call Transcription
-            </span>
-          </div>
+          <span onClick={() => handleCloseModal()} className="cursor-pointer">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+            >
+              <path
+                d="M8.39738 5.59702L5.60205 8.39235"
+                stroke="#130F26"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M8.39825 8.39404L5.60059 5.59579"
+                stroke="#130F26"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M9.52849 1.60428H4.47158C2.70933 1.60428 1.60449 2.85203 1.60449 4.61778V9.38245C1.60449 11.1482 2.70408 12.3959 4.47158 12.3959H9.52791C11.296 12.3959 12.3962 11.1482 12.3962 9.38245V4.61778C12.3962 2.85203 11.296 1.60428 9.52849 1.60428Z"
+                stroke="#130F26"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
+        </div>
+        <div className="w-full border-[1px] border-[#454CCA]">
+          {/* Menu items  */}
+          <div className="flex items-center m-0 p-0">
+            <div
+              onClick={() => handleSetModalContent("callTranscript")}
+              className={`flex grow items-center gap-2 py-2 px-3 border-x-[1px] border-[#454CCA] cursor-pointer ${
+                modalContent === "callTranscript"
+                  ? "bg-[#1C1C2E]"
+                  : "bg-[#2931C2]"
+              }`}
+            >
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="27"
+                  height="26"
+                  viewBox="0 0 27 26"
+                  fill="none"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M22.0444 21.2482C18.3515 24.8141 12.8833 25.5845 8.40842 23.5864C7.74782 23.3296 7.20621 23.122 6.69133 23.122C5.25718 23.1302 3.47208 24.4728 2.54431 23.5781C1.61655 22.6823 3.0082 20.9574 3.0082 19.5643C3.0082 19.0671 2.80176 18.5535 2.53581 17.9145C0.465341 13.5946 1.26439 8.31314 4.95723 4.74841C9.67135 0.195173 17.3303 0.195173 22.0444 4.74724C26.767 9.30751 26.7585 16.6961 22.0444 21.2482Z"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M18.2599 13.4818H18.2707"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M13.4156 13.4818H13.4265"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M8.57139 13.4818H8.58226"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+              <span className="text-white font-bold text-[10px] sm:text-[15px] leading-6">
+                Call Transcription
+              </span>
+            </div>
 
-          <div
-            onClick={() => handleSetModalContent("chatWithAI")}
-            className={`flex grow items-center gap-2 py-2 px-3 border-x-[1px] border-[#454CCA] cursor-pointer ${
-              modalContent === "chatWithAI" ? "bg-[#1C1C2E]" : "bg-[#2931C2]"
-            }`}
-          >
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="20"
-                viewBox="0 0 24 20"
-                fill="none"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M15.6884 10.0619C15.6884 12.0989 14.0364 13.7498 11.9994 13.7498C9.96236 13.7498 8.31152 12.0989 8.31152 10.0619C8.31152 8.02378 9.96236 6.37295 11.9994 6.37295C14.0364 6.37295 15.6884 8.02378 15.6884 10.0619Z"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M11.9978 18.5807C16.4405 18.5807 20.504 15.3864 22.7918 10.0617C20.504 4.73705 16.4405 1.54272 11.9978 1.54272H12.0025C7.55983 1.54272 3.49633 4.73705 1.2085 10.0617C3.49633 15.3864 7.55983 18.5807 12.0025 18.5807H11.9978Z"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-            <span className="text-white font-bold text-[10px] sm:text-[15px] leading-6">
-              Chat with AI
-            </span>
-          </div>
+            <div
+              onClick={() => handleSetModalContent("chatWithAI")}
+              className={`flex grow items-center gap-2 py-2 px-3 border-x-[1px] border-[#454CCA] cursor-pointer ${
+                modalContent === "chatWithAI" ? "bg-[#1C1C2E]" : "bg-[#2931C2]"
+              }`}
+            >
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="20"
+                  viewBox="0 0 24 20"
+                  fill="none"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M15.6884 10.0619C15.6884 12.0989 14.0364 13.7498 11.9994 13.7498C9.96236 13.7498 8.31152 12.0989 8.31152 10.0619C8.31152 8.02378 9.96236 6.37295 11.9994 6.37295C14.0364 6.37295 15.6884 8.02378 15.6884 10.0619Z"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M11.9978 18.5807C16.4405 18.5807 20.504 15.3864 22.7918 10.0617C20.504 4.73705 16.4405 1.54272 11.9978 1.54272H12.0025C7.55983 1.54272 3.49633 4.73705 1.2085 10.0617C3.49633 15.3864 7.55983 18.5807 12.0025 18.5807H11.9978Z"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+              <span className="text-white font-bold text-[10px] sm:text-[15px] leading-6">
+                Chat with AI
+              </span>
+            </div>
 
-          <div
-            onClick={() => handleSetModalContent("AIResponse")}
-            className={`flex grow items-center gap-2 py-2 px-3 border-x-[1px] border-[#454CCA] cursor-pointer ${
-              modalContent === "AIResponse" ? "bg-[#1C1C2E]" : "bg-[#2931C2]"
-            }`}
-          >
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="20"
-                viewBox="0 0 24 20"
-                fill="none"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M15.6884 10.0619C15.6884 12.0989 14.0364 13.7498 11.9994 13.7498C9.96236 13.7498 8.31152 12.0989 8.31152 10.0619C8.31152 8.02378 9.96236 6.37295 11.9994 6.37295C14.0364 6.37295 15.6884 8.02378 15.6884 10.0619Z"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M11.9978 18.5807C16.4405 18.5807 20.504 15.3864 22.7918 10.0617C20.504 4.73705 16.4405 1.54272 11.9978 1.54272H12.0025C7.55983 1.54272 3.49633 4.73705 1.2085 10.0617C3.49633 15.3864 7.55983 18.5807 12.0025 18.5807H11.9978Z"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-            <span className="text-white font-bold text-[10px] sm:text-[15px] leading-6">
-              AI Response
-            </span>
-          </div>
+            <div
+              onClick={() => handleSetModalContent("AIResponse")}
+              className={`flex grow items-center gap-2 py-2 px-3 border-x-[1px] border-[#454CCA] cursor-pointer ${
+                modalContent === "AIResponse" ? "bg-[#1C1C2E]" : "bg-[#2931C2]"
+              }`}
+            >
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="20"
+                  viewBox="0 0 24 20"
+                  fill="none"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M15.6884 10.0619C15.6884 12.0989 14.0364 13.7498 11.9994 13.7498C9.96236 13.7498 8.31152 12.0989 8.31152 10.0619C8.31152 8.02378 9.96236 6.37295 11.9994 6.37295C14.0364 6.37295 15.6884 8.02378 15.6884 10.0619Z"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M11.9978 18.5807C16.4405 18.5807 20.504 15.3864 22.7918 10.0617C20.504 4.73705 16.4405 1.54272 11.9978 1.54272H12.0025C7.55983 1.54272 3.49633 4.73705 1.2085 10.0617C3.49633 15.3864 7.55983 18.5807 12.0025 18.5807H11.9978Z"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+              <span className="text-white font-bold text-[10px] sm:text-[15px] leading-6">
+                AI Response
+              </span>
+            </div>
 
-          <div
-            onClick={() => handleSetModalContent("aboutSection")}
-            className={`flex grow items-center gap-2 py-2 px-3 border-x-[1px] border-[#454CCA] cursor-pointer ${
-              modalContent === "aboutSection" ? "bg-[#1C1C2E]" : "bg-[#2931C2]"
-            }`}
-          >
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M9.59151 15.2068C13.2805 15.2068 16.4335 15.7658 16.4335 17.9988C16.4335 20.2318 13.3015 20.8068 9.59151 20.8068C5.90151 20.8068 2.74951 20.2528 2.74951 18.0188C2.74951 15.7848 5.88051 15.2068 9.59151 15.2068Z"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M9.59157 12.0198C7.16957 12.0198 5.20557 10.0568 5.20557 7.6348C5.20557 5.2128 7.16957 3.2498 9.59157 3.2498C12.0126 3.2498 13.9766 5.2128 13.9766 7.6348C13.9856 10.0478 12.0356 12.0108 9.62257 12.0198H9.59157Z"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M16.4829 10.8816C18.0839 10.6566 19.3169 9.2826 19.3199 7.6196C19.3199 5.9806 18.1249 4.6206 16.5579 4.3636"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M18.5952 14.7322C20.1462 14.9632 21.2292 15.5072 21.2292 16.6272C21.2292 17.3982 20.7192 17.8982 19.8952 18.2112"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-            <span className="text-white font-bold text-[10px] sm:text-[15px] leading-6">
-              About section
-            </span>
-          </div>
+            <div
+              onClick={() => handleSetModalContent("aboutSection")}
+              className={`flex grow items-center gap-2 py-2 px-3 border-x-[1px] border-[#454CCA] cursor-pointer ${
+                modalContent === "aboutSection"
+                  ? "bg-[#1C1C2E]"
+                  : "bg-[#2931C2]"
+              }`}
+            >
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M9.59151 15.2068C13.2805 15.2068 16.4335 15.7658 16.4335 17.9988C16.4335 20.2318 13.3015 20.8068 9.59151 20.8068C5.90151 20.8068 2.74951 20.2528 2.74951 18.0188C2.74951 15.7848 5.88051 15.2068 9.59151 15.2068Z"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M9.59157 12.0198C7.16957 12.0198 5.20557 10.0568 5.20557 7.6348C5.20557 5.2128 7.16957 3.2498 9.59157 3.2498C12.0126 3.2498 13.9766 5.2128 13.9766 7.6348C13.9856 10.0478 12.0356 12.0108 9.62257 12.0198H9.59157Z"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M16.4829 10.8816C18.0839 10.6566 19.3169 9.2826 19.3199 7.6196C19.3199 5.9806 18.1249 4.6206 16.5579 4.3636"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M18.5952 14.7322C20.1462 14.9632 21.2292 15.5072 21.2292 16.6272C21.2292 17.3982 20.7192 17.8982 19.8952 18.2112"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+              <span className="text-white font-bold text-[10px] sm:text-[15px] leading-6">
+                About section
+              </span>
+            </div>
 
-          <div
-            onClick={() => handleSetModalContent("addNotes")}
-            className={`flex grow items-center gap-2 py-2 px-3 border-x-[1px] border-[#454CCA] cursor-pointer ${
-              modalContent === "addNotes" ? "bg-[#1C1C2E]" : "bg-[#2931C2]"
-            }`}
-          >
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="19"
-                height="20"
-                viewBox="0 0 19 20"
-                fill="none"
-              >
-                <path
-                  d="M12.7161 14.2234H5.49609"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M12.7161 10.0369H5.49609"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M8.25109 5.8601H5.49609"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M12.9085 0.749802C12.9085 0.749802 5.23149 0.753802 5.21949 0.753802C2.45949 0.770802 0.750488 2.5868 0.750488 5.3568V14.5528C0.750488 17.3368 2.47249 19.1598 5.25649 19.1598C5.25649 19.1598 12.9325 19.1568 12.9455 19.1568C15.7055 19.1398 17.4155 17.3228 17.4155 14.5528V5.3568C17.4155 2.5728 15.6925 0.749802 12.9085 0.749802Z"
-                  stroke="white"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-            <span className="text-white font-bold text-[10px] sm:text-[15px] leading-6">
-              Add Notes
-            </span>
-          </div>
-          <div
-            onClick={() => handleSetModalContent("flags")}
-            className={`flex grow items-center gap-2 py-2 px-3 border-x-[1px] border-[#454CCA] cursor-pointer ${
-              modalContent === "flags" ? "bg-[#1C1C2E]" : "bg-[#2931C2]"
-            }`}
-          >
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="19"
-                viewBox="0 0 14 19"
-                fill="none"
-              >
-                <path
-                  d="M14 9.13127L10.4431 4.56542L14 0H0V7.98101V9.13127V19H0.89189V9.13127H14ZM0.89189 0.868549H12.2042L9.32382 4.56585L12.2042 8.26359H0.89189V7.98101V0.868549Z"
-                  fill="white"
-                />
-              </svg>
-            </span>
-            <span className="text-white font-bold text-[10px] sm:text-[15px] leading-6">
-              Flags
-            </span>
+            <div
+              onClick={() => handleSetModalContent("addNotes")}
+              className={`flex grow items-center gap-2 py-2 px-3 border-x-[1px] border-[#454CCA] cursor-pointer ${
+                modalContent === "addNotes" ? "bg-[#1C1C2E]" : "bg-[#2931C2]"
+              }`}
+            >
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="19"
+                  height="20"
+                  viewBox="0 0 19 20"
+                  fill="none"
+                >
+                  <path
+                    d="M12.7161 14.2234H5.49609"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M12.7161 10.0369H5.49609"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M8.25109 5.8601H5.49609"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M12.9085 0.749802C12.9085 0.749802 5.23149 0.753802 5.21949 0.753802C2.45949 0.770802 0.750488 2.5868 0.750488 5.3568V14.5528C0.750488 17.3368 2.47249 19.1598 5.25649 19.1598C5.25649 19.1598 12.9325 19.1568 12.9455 19.1568C15.7055 19.1398 17.4155 17.3228 17.4155 14.5528V5.3568C17.4155 2.5728 15.6925 0.749802 12.9085 0.749802Z"
+                    stroke="white"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+              <span className="text-white font-bold text-[10px] sm:text-[15px] leading-6">
+                Add Notes
+              </span>
+            </div>
+            <div
+              onClick={() => handleSetModalContent("flags")}
+              className={`flex grow items-center gap-2 py-2 px-3 border-x-[1px] border-[#454CCA] cursor-pointer ${
+                modalContent === "flags" ? "bg-[#1C1C2E]" : "bg-[#2931C2]"
+              }`}
+            >
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="19"
+                  viewBox="0 0 14 19"
+                  fill="none"
+                >
+                  <path
+                    d="M14 9.13127L10.4431 4.56542L14 0H0V7.98101V9.13127V19H0.89189V9.13127H14ZM0.89189 0.868549H12.2042L9.32382 4.56585L12.2042 8.26359H0.89189V7.98101V0.868549Z"
+                    fill="white"
+                  />
+                </svg>
+              </span>
+              <span className="text-white font-bold text-[10px] sm:text-[15px] leading-6">
+                Flags
+              </span>
+            </div>
           </div>
         </div>
+        {/* All modal body content wrapper */}
+        <div className="bg-[#3637EA]">{selectModalContent}</div>
       </div>
-      {/* All modal body content wrapper */}
-      <div className="bg-[#3637EA]">{selectModalContent}</div>
-    </div>
+    </Draggable>
   );
 };
 

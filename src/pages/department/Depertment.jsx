@@ -4,8 +4,10 @@ import cancelIcons from "../../assets/cancel_icons.png";
 import deleteIcons from "../../assets/delete_icons.png";
 import editIcons from "../../assets/edit_icons.png";
 import CreateAgentAndDepartment from "../../components/Create/CreateAgentAndDepartment";
+import { useNavigate } from "react-router-dom";
 
 export default function Department() {
+  const navigate = useNavigate();
   const [isDepartmentCreate, setIsDepartmentCreate] = useState(false);
   const [originalData, setOriginalData] = useState([
     {
@@ -69,7 +71,10 @@ export default function Department() {
         </div>
 
         {/* Current Balance */}
-        <div className="flex items-center gap-5 justify-center">
+        <div
+          onClick={() => navigate("/dashboard")}
+          className="flex items-center gap-5 justify-center cursor-pointer"
+        >
           <span className="bg-[#3637EA] w-[58px] h-[58px] rounded-full flex items-center justify-center">
             <svg
               width="38"

@@ -78,7 +78,12 @@ const Sidebar = () => {
         } 
         transition-all duration-300 ease-in-out  } `}
       >
-        <img src={logo} className="mt-10 w-4/6 mx-auto" alt="" />
+        <img
+          onClick={() => navigate("/dashboard")}
+          src={logo}
+          className="mt-10 w-4/6 mx-auto cursor-pointer"
+          alt=""
+        />
         {/* top Nav Items */}
         <ul className="mt-6">
           {menuData.map((item) => {
