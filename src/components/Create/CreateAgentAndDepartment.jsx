@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SelectList from "../SelectList/SelectList";
+import SelectList from "../selectList/SelectList";
 
 const CreateAgentAndDepartment = ({ make }) => {
   const [QAType, setQAType] = useState(make);
